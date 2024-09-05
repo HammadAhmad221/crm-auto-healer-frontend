@@ -57,7 +57,7 @@ const VehicleForm = ({ isEdit }) => {
       navigate('/vehicles');
     } catch (error) {
       console.error('Error saving vehicle:', error);
-      setError('Failed to save vehicle');
+      setError('Failed to save vehicle because VIN value should be unique');
     }
   };
 
@@ -128,9 +128,12 @@ const VehicleForm = ({ isEdit }) => {
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           >
+            {/* ['pending', 'picked-up', 'in-transit', 'delivered'] */}
             <option value="pending">Pending</option>
+            <option value="picked-up">Picked-up</option>
+            <option value="in-transit">in-transit</option>
             <option value="delivered">Delivered</option>
-            <option value="rejected">Rejected</option>
+
           </select>
         </div>
         <div className="flex justify-end mt-8"> 

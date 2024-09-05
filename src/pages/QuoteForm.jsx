@@ -9,7 +9,7 @@ const QuoteForm = ({ isEdit }) => {
     customerId: '',
     vehicleId: '',
     price: 0,
-    statu: 'Pending',
+    status: 'Pending',
   });
   const [error, setError] = useState('');
 
@@ -32,8 +32,8 @@ const QuoteForm = ({ isEdit }) => {
     }
   }, [isEdit, id]);
 
-  const handleChange = (e) => {
-    setQuote({ ...quote, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setQuote({ ...quote, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -100,14 +100,15 @@ const QuoteForm = ({ isEdit }) => {
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Status</label>
           <select
-            name="statu"
+            name="status"
             value={quote.status}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            
           >
-            <option value="Assigned">Panding</option>
-            <option value="In Progress">Approved</option>
-            <option value="Delivered">Rejected</option>
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
           </select>
         </div>
         <div className="flex justify-end mt-8">

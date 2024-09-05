@@ -26,7 +26,7 @@ const CustomerForm = ({ isEdit }) => {
     leads: [
       {
         leadSource: '',
-        status: '',
+        status: 'new',
         followUpDate: '',
       },
     ],
