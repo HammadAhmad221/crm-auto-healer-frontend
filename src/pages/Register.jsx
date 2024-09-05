@@ -15,9 +15,9 @@ const Register = () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/user/register`, { name, email, password });
       toast.success('Registration successful!');
-      if(response){
-        localStorage.setItem('User',response.data);
-      }
+      // if(response){
+      //   localStorage.setItem('User',response.data);
+      // }
       navigate('/');
     } catch (error) {
       toast.error(error.response.data || 'Registration failed. Please try again.');

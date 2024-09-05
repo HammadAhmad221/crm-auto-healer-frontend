@@ -293,12 +293,14 @@ const CustomerForm = ({ isEdit }) => {
           </div>
         ))}
       </fieldset>
+      <div className="flex justify-end mt-8">
       <button
         type="submit"
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-      >
+        className="mt-4 bg-blue-500 text-white font-bold px-4 py-2 rounded-md hover:bg-blue-600"
+        >
         {isEdit ? 'Update Customer' : 'Create Customer'}
       </button>
+        </div>
     </form>
  </div>
   );

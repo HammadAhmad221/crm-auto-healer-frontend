@@ -75,9 +75,9 @@ const CustomerDetails = () => {
           <p>No leads available.</p>
         )}
       </fieldset>
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-end gap-4 mt-8">
         <Link to={`/customers/${id}/edit`} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
-          Edit
+          Edit Customer
         </Link>
         <button onClick={async () => {
           if (window.confirm('Are you sure you want to delete this customer?')) {

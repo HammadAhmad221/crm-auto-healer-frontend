@@ -47,7 +47,6 @@ const UserDetails = () => {
         <strong className="block text-lg font-medium">Joined:</strong>
         <p>{new Date(user.date).toLocaleDateString()}</p>
       </div>
-        {/* <p><strong>Joined:</strong> {new Date(user.date).toLocaleDateString()}</p> */}
         <div className="flex justify-end mt-8">
         <Link 
           to={`/users/${user._id}/edit`} 
@@ -67,7 +66,7 @@ const UserDetails = () => {
               navigate('/users')
 
             } catch (error) {
-              console.error('Error deleting customer:', error);
+              console.error('Error deleting user:', error);
             }
           }
         }} className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
