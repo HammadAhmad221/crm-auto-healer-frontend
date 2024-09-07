@@ -26,6 +26,11 @@ import InvoiceDetails from './pages/invoiceDetails';
 import CommunicationLogList from './pages/CommunicationLogList';
 import CommunicationLogDetails from './pages/CommuncationLogDetails';
 import CommunicationLogForm from './pages/CommunicationLogForm';
+import DriverDashboard from './pages/DriverDashboard';
+import DriverProfile from './pages/DriverProfile';
+import AssignedLoads from './pages/AssignedLoads';
+// import PersonalSchedule from './pages/PersonalSchedule'; 
+import ConditionReport from './pages/ConditionReports'; 
 
 function App() {
   return (
@@ -34,6 +39,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Dashboard />} />
+        {/* routes for admin */}
       {/* customer routes  */}
         <Route path="/customers" element={<CustomerList />} />
         <Route path="/customers/new" element={<CustomerForm  isEdit={false}/>} />
@@ -74,6 +80,12 @@ function App() {
         <Route path="/communicationlogs/new" element={<CommunicationLogForm isEdit={false} />} />
         <Route path="/communicationlogs/:id/edit" element={<CommunicationLogForm isEdit={true} />} />
         <Route path="/communicationlogs/:id" element={<CommunicationLogDetails />} />
+      {/* routes for drivers */}
+        <Route path="/driver-dashboard" element={<DriverDashboard/>}/>
+        <Route path="/profile" element={<DriverProfile />} />
+        <Route path="/assigned-loads" element={<AssignedLoads />} />
+        {/* <Route path="/schedule" element={<PersonalSchedule />} /> */}
+        <Route path="/condition-reports/:loadId" element={<ConditionReport />} />
       </Routes>
     </Router>
   );

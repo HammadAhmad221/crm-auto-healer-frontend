@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,12 @@ const Login = () => {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/user/login`, { email, password });
       localStorage.setItem('token', response.data);
       toast.success('Login successful!');
-      navigate('/admin');
+      const userData = jwtDecode(response.data);
+      if(userData.role=="Admin"){
+        navigate('/admin');
+      }else{
+        navigate('/driver-dashboard')
+      }
     } catch (error) {
       toast.error(error.response.data || 'Login failed. Please try again.');
     }
