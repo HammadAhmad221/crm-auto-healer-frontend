@@ -10,7 +10,7 @@ const CommunicationLogForm = ({ isEdit }) => {
     communicationType: 'Email',
     message: '',
   });
-  const [customers, setCustomers] = useState([]); // Assuming you need to fetch customer list
+  const [customers, setCustomers] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
