@@ -13,6 +13,7 @@ const LoadList = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
+        console.log(response.data);
         setLoads(response.data);
       } catch (error) {
         console.error('Error fetching loads:', error);
@@ -31,7 +32,7 @@ const LoadList = () => {
       >
         Add New Load
       </Link>
-      <div className="overflow-x-auto">
+      <div className="scrollbar-custom overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -39,7 +40,7 @@ const LoadList = () => {
                 Vehicle ID
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Driver ID
+                Driver
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Pickup Location
@@ -59,12 +60,12 @@ const LoadList = () => {
             {loads.map((load) => (
               <tr key={load._id}>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/loads/${load._id}`} className="text-blue-600 hover:underline">
+                  <Link to={`/loads/${load._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
                     {load.vehicleId}
                   </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {load.driverId}
+                  {load.driverId.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {load.pickupLocation}
@@ -78,7 +79,7 @@ const LoadList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 
                     to={`/loads/${load._id}/edit`} 
-                    className="text-blue-600 hover:underline"
+                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
                   >
                     Edit
                   </Link>

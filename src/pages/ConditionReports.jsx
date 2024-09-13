@@ -51,12 +51,12 @@ const SubmitConditionReport = () => {
             <h2 className="text-xl font-bold mb-4">Submit Condition Report</h2>
 
             <div className="mb-4">
-                <label className="block text-gray-700 mb-2 text-lg" htmlFor="pickupPhotos">Pickup Condition Photos:</label>
+                <label className="block text-gray-700 mb-2 text-lg" htmlFor="pickupPhotos">Pickup Condition Photo:</label>
                 <input type="file" id="pickupPhotos" multiple onChange={(e) => handleFileChange(e, setPickupPhotos)} />
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700 mb-2 text-lg" htmlFor="deliveryPhotos">Delivery Condition Photos:</label>
+                <label className="block text-gray-700 mb-2 text-lg" htmlFor="deliveryPhotos">Delivery Condition Photo:</label>
                 <input type="file" id="deliveryPhotos" multiple onChange={(e) => handleFileChange(e, setDeliveryPhotos)} />
             </div>
 

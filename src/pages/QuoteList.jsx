@@ -31,7 +31,7 @@
 //       >
 //         Add New Quote
 //       </Link>
-//       <div className="overflow-x-auto">
+//       <div className="scrollbar-custom overflow-x-auto">
 //         <table className="min-w-full bg-white border border-gray-200">
 //           <thead>
 //             <tr>
@@ -56,7 +56,7 @@
 //             {quotes.map((quote) => (
 //               <tr key={quote._id}>
 //                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-//                   <Link to={`/quotes/${quote._id}`} className="text-blue-600 hover:underline">
+//                   <Link to={`/quotes/${quote._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
 //                     {quote.customerId}
 //                   </Link>
 //                 </td>
@@ -72,7 +72,7 @@
 //                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
 //                   <Link 
 //                     to={`/quotes/${quote._id}/edit`} 
-//                     className="text-blue-600 hover:underline"
+//                     className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"
 //                   >
 //                     Edit
 //                   </Link>
@@ -121,7 +121,7 @@ const QuoteList = () => {
       >
         Add New Quote
       </Link>
-      <div className="overflow-x-auto">
+      <div className="scrollbar-custom overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -155,7 +155,7 @@ const QuoteList = () => {
             {quotes.map((quote) => (
               <tr key={quote._id}>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/quotes/${quote._id}`} className="text-blue-600 hover:underline">
+                  <Link to={`/quotes/${quote._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
                     {quote.customerId}
                   </Link>
                 </td>
@@ -180,7 +180,7 @@ const QuoteList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 
                     to={`/quotes/${quote._id}/edit`} 
-                    className="text-blue-600 hover:underline"
+                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
                   >
                     Edit
                   </Link>

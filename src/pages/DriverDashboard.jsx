@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const DriverDashboard = () => {
-  const [licenseNumber, setLicenseNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [id, setId] = useState(null);
   const [error, setError] = useState('');
 
-  const handleLicenseSubmit = async (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/drivers/id-by-license/${licenseNumber}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/drivers/id-by-email/${email}`);
       const driverId = response.data.driverId;
       localStorage.setItem("driverId", driverId);
       setId(driverId);
@@ -27,17 +27,17 @@ const DriverDashboard = () => {
 
       {!id && !localStorage.getItem('driverId') ? (
         <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Enter License Number</h2>
-          <form onSubmit={handleLicenseSubmit}>
+          <h2 className="text-xl font-semibold mb-4">Enter Email</h2>
+          <form onSubmit={handleEmailSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="licenseNumber">
-                License Number
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                Email
               </label>
               <input
                 type="text"
-                id="licenseNumber"
-                value={licenseNumber}
-                onChange={(e) => setLicenseNumber(e.target.value)}
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
@@ -68,16 +68,16 @@ const DriverDashboard = () => {
             </Link>
 
             {/* Schedule Access */}
-            <Link to="/schedule" className="bg-indigo-600 p-4 rounded-lg shadow-md hover:bg-indigo-700">
+            {/* <Link to="/schedule" className="bg-indigo-600 p-4 rounded-lg shadow-md hover:bg-indigo-700">
               <h3 className="text-xl mb-2 font-bold text-white">Access Personal Schedule</h3>
               <p className="text-white">View your daily, weekly, and monthly assignments. Request schedule changes if needed.</p>
-            </Link>
+            </Link> */}
 
             {/* Communication Logs */}
-            <Link to="/communicationlogs/new" className="bg-yellow-700 p-4 rounded-lg shadow-md hover:bg-yellow-800">
+            {/* <Link to="/communicationlogs/new" className="bg-yellow-700 p-4 rounded-lg shadow-md hover:bg-yellow-800">
               <h3 className="text-xl mb-2 font-bold text-white">Communication Logs</h3>
               <p className="text-white">View communication history with the admin team.</p>
-            </Link>
+            </Link> */}
           </div>
         </div>
       )}

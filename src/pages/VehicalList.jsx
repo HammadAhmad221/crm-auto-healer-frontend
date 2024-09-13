@@ -31,7 +31,7 @@ const VehicleList = () => {
       >
         Add New Vehicle
       </Link>
-      <div className="overflow-x-auto">
+      <div className="scrollbar-custom overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -62,7 +62,7 @@ const VehicleList = () => {
                   {/* {vehicle.make} */}
                   <Link 
                     to={`/vehicles/${vehicle._id}`} 
-                    className="text-blue-600 hover:underline"
+                    className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"
                   >
                     {vehicle.make}
                   </Link>
@@ -82,7 +82,7 @@ const VehicleList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 
                     to={`/vehicles/${vehicle._id}/edit`} 
-                    className="text-blue-600 hover:underline ml-4"
+                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
                   >
                     Edit
                   </Link>

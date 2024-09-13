@@ -31,7 +31,7 @@ const CustomerList = () => {
       >
         Add New Customer
       </Link>
-      <div className="overflow-x-auto">
+      <div className="scrollbar-custom overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -53,7 +53,7 @@ const CustomerList = () => {
             {customers.map((customer) => (
               <tr key={customer._id}>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/customers/${customer._id}`} className="text-blue-600 hover:underline">
+                  <Link to={`/customers/${customer._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
                     {customer.name}
                   </Link>
                 </td>
@@ -66,7 +66,7 @@ const CustomerList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 
                     to={`/customers/${customer._id}/edit`} 
-                    className="text-blue-600 hover:underline"
+                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
                   >
                     Edit
                   </Link>
