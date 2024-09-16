@@ -17,6 +17,7 @@ const Login = () => {
       localStorage.setItem('token', response.data);
       toast.success('Login successful!');
       const userData = jwtDecode(response.data);
+      localStorage.setItem('role',userData.role);
       if(userData.role=="Admin"){
         navigate('/admin');
       }else{
