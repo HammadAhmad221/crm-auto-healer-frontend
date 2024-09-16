@@ -12,7 +12,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    historyApiFallback: true,
+    // historyApiFallback: true,
+    appType: 'mpa',
   },
   build: {
     rollupOptions: {
