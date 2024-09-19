@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const DriverDetails = () => {
   const [driver, setDriver] = useState(null);
@@ -32,7 +33,9 @@ const DriverDetails = () => {
   if (!driver) return <div>Driver not found</div>;
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Driver Details</h2>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Name:</strong>
@@ -86,6 +89,7 @@ const DriverDetails = () => {
         </button>
       </div>
     </div>
+</>
   );
 };
 

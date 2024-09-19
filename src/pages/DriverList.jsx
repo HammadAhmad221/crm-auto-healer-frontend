@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const DriverList = () => {
   const [drivers, setDrivers] = useState([]);
@@ -23,7 +24,9 @@ const DriverList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+<>
+<HomeButton/>
+<div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Drivers</h2>
       <Link 
         to="/drivers/new" 
@@ -77,6 +80,7 @@ const DriverList = () => {
         </table>
       </div>
     </div>
+</>
   );
 };
 

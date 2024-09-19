@@ -133,6 +133,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const InvoiceForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -216,7 +217,9 @@ const InvoiceForm = ({ isEdit }) => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">
         {isEdit ? 'Edit Invoice' : 'Add New Invoice'}
       </h2>
@@ -289,6 +292,7 @@ const InvoiceForm = ({ isEdit }) => {
         </div>
       </form>
     </div>
+</>
   );
 };
 

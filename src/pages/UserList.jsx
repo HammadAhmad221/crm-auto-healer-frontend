@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -24,7 +25,9 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+<>
+<HomeButton/>
+<div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Users</h2>
       <Link 
         to="/users/new" 
@@ -78,6 +81,7 @@ const UserList = () => {
         </table>
       </div>
     </div>
+</>
   );
 };
 

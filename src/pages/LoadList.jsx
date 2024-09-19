@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StatusDropdown from '../components/StatusDropdown';
+import HomeButton from '../components/HomeButton';
 
 
 const LoadList = () => {
@@ -48,7 +49,9 @@ const LoadList = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+<>
+<HomeButton/>
+<div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Loads</h2>
       <Link 
         to="/loads/new" 
@@ -119,6 +122,7 @@ const LoadList = () => {
         </table>
       </div>
     </div>
+</>
   );
 };
 

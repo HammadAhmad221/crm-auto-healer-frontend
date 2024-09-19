@@ -66,18 +66,6 @@ const DriverDashboard = () => {
               <h3 className="text-xl mb-2 font-bold text-white">View Assigned Loads</h3>
               <p className="text-white">Check your current loads and update the status (e.g., picked up, in transit, delivered).</p>
             </Link>
-
-            {/* Schedule Access */}
-            {/* <Link to="/schedule" className="bg-indigo-600 p-4 rounded-lg shadow-md hover:bg-indigo-700">
-              <h3 className="text-xl mb-2 font-bold text-white">Access Personal Schedule</h3>
-              <p className="text-white">View your daily, weekly, and monthly assignments. Request schedule changes if needed.</p>
-            </Link> */}
-
-            {/* Communication Logs */}
-            {/* <Link to="/communicationlogs/new" className="bg-yellow-700 p-4 rounded-lg shadow-md hover:bg-yellow-800">
-              <h3 className="text-xl mb-2 font-bold text-white">Communication Logs</h3>
-              <p className="text-white">View communication history with the admin team.</p>
-            </Link> */}
           </div>
         </div>
       )}

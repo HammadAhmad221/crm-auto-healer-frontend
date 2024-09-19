@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const ProfileManagement = () => {
   const [update,setUpdate] = useState();
@@ -77,7 +78,9 @@ const ProfileManagement = () => {
     };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 pt-6">
+<>
+<HomeButton/>
+<div className="min-h-screen bg-gray-100 px-4 pt-6">
       <h1 className="text-3xl font-bold mb-6">Profile Management</h1>
       {loading ? (
         <p>Loading...</p>
@@ -149,6 +152,7 @@ const ProfileManagement = () => {
         </div>
       )}
     </div>
+</>
   );
 };
 

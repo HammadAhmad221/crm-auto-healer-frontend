@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import { Link,useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const LoadDetails = () => {
   const { id } = useParams();
@@ -36,7 +37,9 @@ const LoadDetails = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Load Details</h2>
       <div className="mb-4">
         <h3 className="text-lg font-medium text-gray-700">Vehicle:</h3>
@@ -89,6 +92,7 @@ const LoadDetails = () => {
         </button>
       </div>
     </div>
+</>
   );
 };
 

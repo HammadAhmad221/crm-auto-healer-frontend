@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const CustomerForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -108,7 +109,9 @@ const CustomerForm = ({ isEdit }) => {
   };
 
   return (
- <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">{isEdit ? 'Edit Customer' : 'Add New Customer'}</h2>
      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-8 bg-white shadow-md rounded-lg">
       <div className="mb-6">
@@ -303,6 +306,7 @@ const CustomerForm = ({ isEdit }) => {
         </div>
     </form>
  </div>
+</>
   );
 };
 

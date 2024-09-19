@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import HomeButton from '../components/HomeButton';
 
 const InvoiceDetails = () => {
   const { id } = useParams();
@@ -61,7 +62,9 @@ const InvoiceDetails = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <div id="invoice-pdf" className="p-8 border border-gray-300">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-8">
@@ -130,7 +133,7 @@ const InvoiceDetails = () => {
         >
           Download PDF
         </button>
-        {localStorage.getItem("role")=="Admin" &&
+        {localStorage.getItem("token") &&
         <>
 
          <Link
@@ -162,6 +165,7 @@ const InvoiceDetails = () => {
         }
       </div>
     </div>
+</>
   );
 };
 

@@ -66,10 +66,10 @@ function App() {
         <Route path="/loads/:id/edit" element={<LoadForm isEdit={true} />} />
         <Route path="/loads/:id" element={<LoadDetails />} />
       {/* Quote routes */}
-        <Route path="/quotes" element={<QuoteList />} />
+        {/* <Route path="/quotes" element={<QuoteList />} />
         <Route path="/quotes/new" element={<QuoteForm isEdit={false} />} />
         <Route path="/quotes/:id/edit" element={<QuoteForm isEdit={true} />} />
-        <Route path="/quotes/:id" element={<QuoteDetails />} />
+        <Route path="/quotes/:id" element={<QuoteDetails />} /> */}
       {/* Invoice routes */}
         <Route path="/invoices" element={<InvoiceList />} />
         <Route path="/invoices/new" element={<InvoiceForm isEdit={false} />} />

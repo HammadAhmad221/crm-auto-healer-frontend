@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HomeButton from '../components/HomeButton';
 
 const LoadForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -77,7 +78,9 @@ const LoadForm = ({ isEdit }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+<>
+<HomeButton/>
+<div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit Load' : 'Add New Load'}</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-200">
         {error && <p className="text-red-500">{error}</p>}
@@ -176,6 +179,7 @@ const LoadForm = ({ isEdit }) => {
         </div>
       </form>
     </div>
+</>
   );
 };
 
