@@ -16,12 +16,12 @@ const Login = () => {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/user/login`, { email, password });
       localStorage.setItem('token', response.data);
       toast.success('Login successful!');
-      const userData = jwtDecode(response.data);
-      if(userData.role=="Admin"){
+      // const userData = jwtDecode(response.data);
+      // if(userData.role=="Admin"){
         navigate('/admin');
-      }else{
-        navigate('/driver-dashboard')
-      }
+      // }else{
+        // navigate('/driver-dashboard')
+      // }
     } catch (error) {
       toast.error(error.response.data || 'Login failed. Please try again.');
     }

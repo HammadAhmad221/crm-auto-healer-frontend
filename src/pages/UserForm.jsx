@@ -100,7 +100,7 @@ const UserForm = ({ isEdit }) => {
             />
           </div>
         )}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Role</label>
           <select
             name="role"
@@ -112,7 +112,7 @@ const UserForm = ({ isEdit }) => {
             <option value="Driver">Driver</option>
             <option value="Customer">Customer</option>
           </select>
-        </div>
+        </div> */}
         <div className="flex justify-end mt-8">
 
         <button

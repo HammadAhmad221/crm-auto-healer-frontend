@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import StatusDropdown from '../components/StatusDropdown';
+
 
 const LoadList = () => {
   const [loads, setLoads] = useState([]);
@@ -23,6 +25,28 @@ const LoadList = () => {
     fetchLoads();
   }, []);
 
+  const statusOptions=['Delivered','In Transit','In Progress'];
+
+  const handleUpdateStatus = async (loadId, newStatus) => {
+    try {
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}api/loads/${loadId}`, 
+      { status: newStatus }, 
+      {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      });
+      
+      setLoads((prevLoads) =>
+        prevLoads.map((load) =>
+          load._id === loadId ? { ...load, status: newStatus } : load
+        )
+      );
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Loads</h2>
@@ -37,7 +61,7 @@ const LoadList = () => {
           <thead>
             <tr>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Vehicle ID
+                Vehicle Make
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Driver
@@ -61,7 +85,7 @@ const LoadList = () => {
               <tr key={load._id}>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link to={`/loads/${load._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
-                    {load.vehicleId}
+                    {load.vehicleId.make}
                   </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
@@ -74,7 +98,12 @@ const LoadList = () => {
                   {load.deliveryLocation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {load.status}
+                  {/* {load.status} */}
+                  <StatusDropdown
+                    currentStatus={load.status}
+                    onChangeStatus={(newStatus) => handleUpdateStatus(load._id, newStatus)}
+                    options={statusOptions}
+                  />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 

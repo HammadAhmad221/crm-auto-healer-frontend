@@ -134,6 +134,8 @@ const InvoiceList = () => {
     fetchInvoices();
   }, []);
 
+  const statusOptions = ['Paid', 'Unpaid', 'Pending'];
+
   const handleUpdateStatus = async (invoiceId, newStatus) => {
     try {
       await axios.put(`${import.meta.env.VITE_BACKEND_URL}api/invoices/${invoiceId}`, 
@@ -218,6 +220,7 @@ const InvoiceList = () => {
                   <StatusDropdown
                     currentStatus={invoice.status}
                     onChangeStatus={(newStatus) => handleUpdateStatus(invoice._id, newStatus)}
+                    options={statusOptions}
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">

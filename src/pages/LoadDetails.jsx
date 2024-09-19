@@ -39,12 +39,12 @@ const LoadDetails = () => {
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Load Details</h2>
       <div className="mb-4">
-        <h3 className="text-lg font-medium text-gray-700">Vehicle ID:</h3>
-        <p>{load.vehicleId}</p>
+        <h3 className="text-lg font-medium text-gray-700">Vehicle:</h3>
+        <p>{load.vehicleId.make}</p>
       </div>
       <div className="mb-4">
-        <h3 className="text-lg font-medium text-gray-700">Driver ID:</h3>
-        <p>{load.driverId}</p>
+        <h3 className="text-lg font-medium text-gray-700">Driver:</h3>
+        <p>{load.driverId.name}</p>
       </div>
       <div className="mb-4">
         <h3 className="text-lg font-medium text-gray-700">Pickup Location:</h3>

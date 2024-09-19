@@ -162,11 +162,11 @@ const InvoiceDetails = () => {
             <p className="text-sm text-gray-500">Date: {new Date(invoice.date).toLocaleDateString()}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-semibold text-gray-800">Auto Halers</h2>
-            <p className="text-sm text-gray-500">Ali Town, Thokar Niaz Baig</p>
-            <p className="text-sm text-gray-500">Lahore, Pakistan, 5400</p>
-            <p className="text-sm text-gray-500">Phone: 0313-1000000</p>
-            <p className="text-sm text-gray-500">Email: metaViz@pro.com</p>
+            <h2 className="text-2xl font-semibold text-gray-800">Drive point logistics Llc</h2>
+            <p className="text-sm text-gray-500">Phone: 407-809-5670</p>
+            <Link to='https://drivepointlogistics.com' className="text-sm text-gray-500">https://drivepointlogistics.com</Link>
+            <p className="text-2xl font-bold text-gray-500">Payment methods</p>
+            <p className="text-sm text-gray-500">Zelle - Cashapp - Credit card</p>
           </div>
         </div>
 
