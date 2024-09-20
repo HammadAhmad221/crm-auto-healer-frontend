@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StatusDropdown from '../components/StatusDropdown';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 
 const LoadList = () => {
@@ -16,7 +17,7 @@ const LoadList = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        console.log(response.data);
+        // console.log(response.data);
         setLoads(response.data);
       } catch (error) {
         console.error('Error fetching loads:', error);
@@ -51,6 +52,8 @@ const LoadList = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Loads</h2>
       <Link 

@@ -8,13 +8,13 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        if (!localStorage.getItem('recordCounts')) { 
+        // if (!localStorage.getItem('recordCounts')) { 
           const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/counts`);
           setCounts(response.data.result);
           localStorage.setItem('recordCounts', JSON.stringify(response.data.result));
-        } else {
-          setCounts(JSON.parse(localStorage.getItem('recordCounts')));
-        }
+        // } else {
+          // setCounts(JSON.parse(localStorage.getItem('recordCounts')));
+        // }
       } catch (error) {
         console.error('Failed to fetch record counts');
       }
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
           </Link>
 
           {/* Quotes */}
-          <Link to="/quotes" className="bg-purple-700 p-4 rounded-lg shadow-md hover:bg-purple-800">
+          {/* <Link to="/quotes" className="bg-purple-700 p-4 rounded-lg shadow-md hover:bg-purple-800">
             <div className='flex justify-between'>
               <h3 className="text-xl mb-2 font-bold text-white">Quotes</h3>
               <h3 className='text-xl font-bold text-white'>{counts?.quote}</h3>
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
             <ul>
               <li><Link to="/quotes/new" className="text-white font-bold hover:underline">Add New</Link></li>
             </ul>
-          </Link>
+          </Link> */}
 
           {/* Invoices */}
           <Link to="/invoices" className="bg-teal-700 p-4 rounded-lg shadow-md hover:bg-teal-800">

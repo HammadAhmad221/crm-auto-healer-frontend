@@ -12,10 +12,9 @@ const HomeButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-4 right-4 bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="fixed top-4 right-20 bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
-      <IoHome className="inline-block mr-2" />
-      Go Home
+      <IoHome className="inline-block" />
     </button>
   );
 };

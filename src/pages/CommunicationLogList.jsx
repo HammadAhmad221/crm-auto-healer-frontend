@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const CommunicationLogList = () => {
   const [logs, setLogs] = useState([]);
@@ -27,6 +28,8 @@ const CommunicationLogList = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Communication Logs</h2>
       <Link 

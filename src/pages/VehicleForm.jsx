@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const VehicleForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -65,6 +66,8 @@ const VehicleForm = ({ isEdit }) => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit Vehicle' : 'Add New Vehicle'}</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-200">

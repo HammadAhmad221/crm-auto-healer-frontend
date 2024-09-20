@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StatusDropdown from '../components/StatusDropdown';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
@@ -15,13 +16,7 @@ const InvoiceList = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        console.log(response);
-        const modifiedInvoices = response.data.map(invoice => ({
-          ...invoice,
-          customerId: invoice.customerId.name,
-          loadId: invoice.loadId.pickupLocation,
-        }));
-        setInvoices(modifiedInvoices);
+        setInvoices(response.data);
       } catch (error) {
         console.error('Error fetching invoices:', error);
       }
@@ -55,6 +50,8 @@ const InvoiceList = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-6">Invoices</h2>
       <Link 
@@ -71,10 +68,13 @@ const InvoiceList = () => {
                 Invoice ID
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Customer Name
+                Customer
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Load Location
+                Load Id
+              </th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Pickup Location
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Amount
@@ -106,10 +106,13 @@ const InvoiceList = () => {
 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.customerId}
+                  {invoice.customerId.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId}
+                  {invoice.loadId.loadId}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                  {invoice.loadId.pickupLocation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   ${invoice.amount.toFixed(2)}

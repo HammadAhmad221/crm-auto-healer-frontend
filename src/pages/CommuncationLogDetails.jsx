@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const CommunicationLogDetails = () => {
   const { id } = useParams();
@@ -43,6 +44,7 @@ const CommunicationLogDetails = () => {
   return (
     <>
     <HomeButton/>
+    <BackButton/>
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Communication Log Details</h2>
       <div className="mb-4">

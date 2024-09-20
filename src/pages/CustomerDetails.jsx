@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const CustomerDetails = () => {
   const { id } = useParams();
@@ -30,6 +31,8 @@ const CustomerDetails = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Customer Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

@@ -4,6 +4,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const InvoiceDetails = () => {
   const { id } = useParams();
@@ -64,6 +65,8 @@ const InvoiceDetails = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <div id="invoice-pdf" className="p-8 border border-gray-300">
         {/* Header Section */}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const SubmitConditionReport = () => {
   const {loadId} = useParams();
@@ -50,6 +51,8 @@ const SubmitConditionReport = () => {
     return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 shadow-lg rounded-lg">
             <h2 className="text-xl font-bold mb-4">Submit Condition Report</h2>
 

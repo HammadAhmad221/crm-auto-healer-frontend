@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const VehicleDetails = () => {
   const { id } = useParams();
@@ -46,6 +47,8 @@ const VehicleDetails = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Vehicle Details</h2>
       <div className="bg-white p-4 border border-gray-200">

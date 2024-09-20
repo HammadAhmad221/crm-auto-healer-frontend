@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -31,6 +32,8 @@ const UserDetails = () => {
   return (
 <>
 <HomeButton/>
+<BackButton/>
+
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">User Details</h2>
       <div className="bg-white p-4 border border-gray-200">
