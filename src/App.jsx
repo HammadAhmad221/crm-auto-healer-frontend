@@ -31,6 +31,7 @@ import DriverProfile from './pages/DriverProfile';
 import AssignedLoads from './pages/AssignedLoads';
 // import PersonalSchedule from './pages/PersonalSchedule'; 
 import ConditionReport from './pages/ConditionReports'; 
+import InvoiceStats from './pages/InvoiceStats';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/invoices/new" element={<InvoiceForm isEdit={false} />} />
         <Route path="/invoices/:id/edit" element={<InvoiceForm isEdit={true} />} />
         <Route path="/invoices/:id" element={<InvoiceDetails />} />
+        <Route path="/invoices/stats" element={<InvoiceStats />} />
       {/* CommunicationLog routes */}
         <Route path="/communicationlogs" element={<CommunicationLogList />} />
         <Route path="/communicationlogs/new" element={<CommunicationLogForm isEdit={false} />} />

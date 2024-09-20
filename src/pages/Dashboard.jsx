@@ -93,6 +93,14 @@ const AdminDashboard = () => {
             <ul>
               <li><Link to="/invoices/new" className="text-white font-bold hover:underline">Add New</Link></li>
             </ul>
+            {/* <ul>
+              <li><Link to="/invoices/stats" className="text-white font-bold hover:underline">Statistics</Link></li>
+            </ul> */}
+          </Link>
+          {/* Statistics */}
+          <Link to="/invoices/stats" className="bg-orange-700 p-4 rounded-lg shadow-md hover:bg-orange-800">
+              <h3 className="text-xl mb-2 font-bold text-white">Stats</h3>
+
           </Link>
 
           {/* Vehicles */}
