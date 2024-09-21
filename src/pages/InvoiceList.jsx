@@ -72,7 +72,7 @@ const InvoiceList = () => {
                 Invoice ID
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                invoice
+                customer
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Load Id
@@ -113,19 +113,19 @@ const InvoiceList = () => {
 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.invoiceId.name}
+                  {invoice.customerId?.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId.loadId}
+                  {invoice.loadId?.loadId}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId.pickupLocation}
+                  {invoice.loadId?.pickupLocation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId.deliveryLocation}
+                  {invoice.loadId?.deliveryLocation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  ${invoice.amount.toFixed(2)}
+                  ${invoice?.amount.toFixed(2)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <StatusDropdown

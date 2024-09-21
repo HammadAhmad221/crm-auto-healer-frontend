@@ -57,7 +57,7 @@ const StatusDropdown = ({ currentStatus, onChangeStatus, options }) => {
   return (
     <div className="relative">
       <div
-        className={`cursor-pointer px-6 py-4 whitespace-nowrap select-none text-center border-b border-gray-200 ${currentStatus === options[0] ? 'text-green-600' : currentStatus === options[1] ? 'text-red-600' : 'text-yellow-600'}`}
+        className={`cursor-pointer whitespace-nowrap select-none text-center border-b border-gray-200 ${currentStatus === options[0] ? 'text-green-600' : currentStatus === options[1] ? 'text-red-600' : 'text-yellow-600'}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {currentStatus}

@@ -94,7 +94,7 @@ const LoadList = () => {
           <tbody>
             {loads.map((load) => (
               <tr key={load._id}>
-                                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex items-center">
                   {load.loadId}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
@@ -119,7 +119,7 @@ const LoadList = () => {
                     options={statusOptions}
                   />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
+                <td className="px-6 py-4 whitespace-nowrap border-gray-200 flex gap-1">
                 <button 
                     onClick={()=>navigate(`/loads/${load._id}`)} 
                     className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
