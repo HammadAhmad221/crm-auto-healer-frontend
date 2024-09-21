@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import StatusDropdown from '../components/StatusDropdown';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FaTrash, FaEdit, FaInfoCircle } from 'react-icons/fa';
+
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
+  const navigate=useNavigate();
 
   useEffect(() => {
     const fetchInvoices = async () => {
@@ -23,7 +27,7 @@ const InvoiceList = () => {
     };
 
     fetchInvoices();
-  }, []);
+  }, [invoices]);
 
   const statusOptions = ['Paid', 'Unpaid', 'Pending'];
 
@@ -68,13 +72,16 @@ const InvoiceList = () => {
                 Invoice ID
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Customer
+                invoice
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Load Id
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Pickup Location
+              </th>
+              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Delivery Location
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Amount
@@ -97,22 +104,25 @@ const InvoiceList = () => {
                   {/* <Link to={`/invoices/${invoice._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
                     {invoice._id}
                   </Link> */}
-                  <Link
+                  {/* <Link
                      to={`/invoices/${invoice._id}`}
                      className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"
-                    >
+                    > */}
                    {invoice._id}
-                  </Link>
+                  {/* </Link> */}
 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.customerId.name}
+                  {invoice.invoiceId.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {invoice.loadId.loadId}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {invoice.loadId.pickupLocation}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                  {invoice.loadId.deliveryLocation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   ${invoice.amount.toFixed(2)}
@@ -127,10 +137,43 @@ const InvoiceList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {new Date(invoice.date).toLocaleDateString()}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link to={`/invoices/${invoice._id}/edit`} className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200">
                     Edit
                   </Link>
+                </td> */}
+                                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
+                <button 
+                    onClick={()=>navigate(`/invoices/${invoice._id}`)} 
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
+                  >
+                    <FaInfoCircle/>
+                  </button>
+                  <button 
+                    onClick={()=>navigate(`/invoices/${invoice._id}/edit`)} 
+                    className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600"
+                  >
+                    <FaEdit/>
+                  </button>
+                  <button
+          onClick={async () => {
+            if (window.confirm('Are you sure you want to delete this invoice?')) {
+              try {
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/invoices/${invoice._id}`, {
+                  headers: {
+                    Authorization: localStorage.getItem('token'),
+                  },
+                });
+                // navigate('/invoices');
+              } catch (error) {
+                console.error('Error deleting invoice:', error);
+              }
+            }
+          }}
+          className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+        >
+          <FaTrash/>
+        </button>
                 </td>
               </tr>
             ))}

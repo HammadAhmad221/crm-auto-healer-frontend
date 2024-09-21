@@ -4,10 +4,12 @@ import axios from 'axios';
 import StatusDropdown from '../components/StatusDropdown';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
-
+import { useNavigate } from 'react-router-dom';
+import { FaTrash, FaEdit, FaInfoCircle } from 'react-icons/fa';
 
 const LoadList = () => {
   const [loads, setLoads] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLoads = async () => {
@@ -25,7 +27,7 @@ const LoadList = () => {
     };
 
     fetchLoads();
-  }, []);
+  }, [loads]);
 
   const statusOptions=['Delivered','In Transit','In Progress'];
 
@@ -66,8 +68,11 @@ const LoadList = () => {
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
+            <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Load Id
+              </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Vehicle Make
+                Vehicle
               </th>
               <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Driver
@@ -89,10 +94,13 @@ const LoadList = () => {
           <tbody>
             {loads.map((load) => (
               <tr key={load._id}>
+                                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                  {load.loadId}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/loads/${load._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
+                  {/* <Link to={`/loads/${load._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"> */}
                     {load.vehicleId.make}
-                  </Link>
+                  {/* </Link> */}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {load.driverId.name}
@@ -111,13 +119,38 @@ const LoadList = () => {
                     options={statusOptions}
                   />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link 
-                    to={`/loads/${load._id}/edit`} 
-                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
+                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
+                <button 
+                    onClick={()=>navigate(`/loads/${load._id}`)} 
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
                   >
-                    Edit
-                  </Link>
+                    <FaInfoCircle/>
+                  </button>
+                  <button 
+                    onClick={()=>navigate(`/loads/${load._id}/edit`)} 
+                    className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600"
+                  >
+                    <FaEdit/>
+                  </button>
+                  <button
+          onClick={async () => {
+            if (window.confirm('Are you sure you want to delete this load?')) {
+              try {
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/loads/${load._id}`, {
+                  headers: {
+                    Authorization: localStorage.getItem('token'),
+                  },
+                });
+                // navigate('/invoices');
+              } catch (error) {
+                console.error('Error deleting load:', error);
+              }
+            }
+          }}
+          className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+        >
+          <FaTrash/>
+        </button>
                 </td>
               </tr>
             ))}

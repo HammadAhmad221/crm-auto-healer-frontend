@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { FaTrash, FaEdit, FaInfoCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -22,7 +26,7 @@ const CustomerList = () => {
     };
 
     fetchCustomers();
-  }, []);
+  }, [customers]);
 
   return (
 <>
@@ -59,9 +63,9 @@ const CustomerList = () => {
             {customers.map((customer) => (
               <tr key={customer._id}>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/customers/${customer._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200">
+                  {/* <Link to={`/customers/${customer._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"> */}
                     {customer.name}
-                  </Link>
+                  {/* </Link> */}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {customer.email}
@@ -69,13 +73,38 @@ const CustomerList = () => {
                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {customer.phone}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link 
-                    to={`/customers/${customer._id}/edit`} 
-                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
+                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
+                <button 
+                    onClick={()=>navigate(`/customers/${customer._id}`)} 
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
                   >
-                    Edit
-                  </Link>
+                    <FaInfoCircle/>
+                  </button>
+                  <button 
+                    onClick={()=>navigate(`/customers/${customer._id}/edit`)} 
+                    className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600"
+                  >
+                    <FaEdit/>
+                  </button>
+                  <button
+          onClick={async () => {
+            if (window.confirm('Are you sure you want to delete this customer?')) {
+              try {
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/customers/${customer._id}`, {
+                  headers: {
+                    Authorization: localStorage.getItem('token'),
+                  },
+                });
+                // navigate('/invoices');
+              } catch (error) {
+                console.error('Error deleting customer:', error);
+              }
+            }
+          }}
+          className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+        >
+          <FaTrash/>
+        </button>
                 </td>
               </tr>
             ))}
