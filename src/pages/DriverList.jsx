@@ -26,7 +26,7 @@ const DriverList = () => {
     };
 
     fetchDrivers();
-  }, [drivers]);
+  }, []);
 
   return (
 <>

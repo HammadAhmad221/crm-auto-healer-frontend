@@ -27,7 +27,7 @@ const LoadList = () => {
     };
 
     fetchLoads();
-  }, [loads]);
+  }, []);
 
   const statusOptions=['Delivered','In Transit','In Progress'];
 

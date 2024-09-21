@@ -26,7 +26,7 @@ const CustomerList = () => {
     };
 
     fetchCustomers();
-  }, [customers]);
+  }, []);
 
   return (
 <>

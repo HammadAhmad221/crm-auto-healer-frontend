@@ -25,7 +25,7 @@ const VehicleList = () => {
     };
 
     fetchVehicles();
-  }, [vehicles]);
+  }, []);
 
   return (
 <>

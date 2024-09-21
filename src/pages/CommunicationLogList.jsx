@@ -206,7 +206,7 @@ const EmailList = () => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/emails');
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/emails`);
         setEmails(response.data);
       } catch (error) {
         console.error('Error fetching emails:', error);

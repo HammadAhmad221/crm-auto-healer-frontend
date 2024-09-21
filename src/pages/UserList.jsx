@@ -27,7 +27,7 @@ const UserList = () => {
     };
 
     fetchUsers();
-  }, [users]);
+  }, []);
 
   return (
 <>

@@ -27,7 +27,7 @@ const InvoiceList = () => {
     };
 
     fetchInvoices();
-  }, [invoices]);
+  }, []);
 
   const statusOptions = ['Paid', 'Unpaid', 'Pending'];
 
