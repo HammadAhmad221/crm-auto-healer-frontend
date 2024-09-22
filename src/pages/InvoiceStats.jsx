@@ -147,10 +147,10 @@ const InvoiceStats = () => {
             {invoices.length > 0 ? (
               invoices.map((invoice) => (
                 <tr key={invoice._id}>
-                  <td className="px-6 py-4 border-b border-gray-200">{invoice.customerId.name}</td>
-                  <td className="px-6 py-4 border-b border-gray-200">{invoice.loadId.pickupLocation}</td>
-                  <td className="px-6 py-4 border-b border-gray-200">{invoice.amount}</td>
-                  <td className="px-6 py-4 border-b border-gray-200">{invoice.status}</td>
+                  <td className="px-6 py-4 border-b border-gray-200">{invoice.customerId?.name}</td>
+                  <td className="px-6 py-4 border-b border-gray-200">{invoice.loadId?.pickupLocation}</td>
+                  <td className="px-6 py-4 border-b border-gray-200">{invoice?.amount}</td>
+                  <td className="px-6 py-4 border-b border-gray-200">{invoice?.status}</td>
                   <td className="px-6 py-4 border-b border-gray-200">{new Date(invoice.date).toLocaleDateString()}</td>
                 </tr>
               ))

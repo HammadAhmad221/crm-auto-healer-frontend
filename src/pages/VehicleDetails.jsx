@@ -54,34 +54,34 @@ const VehicleDetails = () => {
       <div className="bg-white p-4 border border-gray-200">
       <div className="mb-6">
         <strong className="block text-lg font-medium">Make:</strong>
-        <p>{vehicle.make}</p>
+        <p className='detailsTruncate'>{vehicle.make}</p>
       </div>
-        {/* <p><strong>Make:</strong> {vehicle.make}</p> */}
+        {/* <p className='detailsTruncate'><strong>Make:</strong> {vehicle.make}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">Model:</strong>
-        <p>{vehicle.model}</p>
+        <p className='detailsTruncate'>{vehicle.model}</p>
       </div> 
-        {/* <p><strong>Model:</strong> {vehicle.model}</p> */}
+        {/* <p className='detailsTruncate'><strong>Model:</strong> {vehicle.model}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">Year:</strong>
-        <p>{vehicle.year}</p>
+        <p className='detailsTruncate'>{vehicle.year}</p>
       </div>
-        {/* <p><strong>Year:</strong> {vehicle.year}</p> */}
+        {/* <p className='detailsTruncate'><strong>Year:</strong> {vehicle.year}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">VIN:</strong>
-        <p>{vehicle.vin}</p>
+        <p className='detailsTruncate'>{vehicle.vin}</p>
       </div>
-        {/* <p><strong>VIN:</strong> {vehicle.vin}</p> */}
+        {/* <p className='detailsTruncate'><strong>VIN:</strong> {vehicle.vin}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">Special Instructions:</strong>
-        <p>{vehicle.specialInstructions}</p>
+        <p className='detailsTruncate'>{vehicle.specialInstructions}</p>
       </div>
-        {/* <p><strong>Special Instructions:</strong> {vehicle.specialInstructions}</p> */}
-        <div className="mb-6">
+        {/* <p className='detailsTruncate'><strong>Special Instructions:</strong> {vehicle.specialInstructions}</p> */}
+        {/* <div className="mb-6">
         <strong className="block text-lg font-medium">Status:</strong>
-        <p>{vehicle.status}</p>
-      </div>
-        {/* <p><strong>Status:</strong> {vehicle.status}</p> */}
+        <p className='detailsTruncate'>{vehicle.status}</p>
+      </div> */}
+        {/* <p className='detailsTruncate'><strong>Status:</strong> {vehicle.status}</p> */}
       </div>
       <div className="flex justify-end mt-6">
       <Link 

@@ -105,7 +105,14 @@ const CustomerForm = ({ isEdit }) => {
       headers: { 'Authorization': localStorage.getItem('token') },
       data: customer,
     })
-      .then(() => navigate('/customers'))
+      .then(() => {
+        if (isEdit) {
+          window.alert('Customer updated successfully!');
+        } else {
+          window.alert('Customer added successfully!');
+        }
+      })
+      // navigate('/customers'))
       .catch(error => console.error('Error saving customer:', error));
   };
 

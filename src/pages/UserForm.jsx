@@ -48,14 +48,16 @@ const UserForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('User updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/users`, user, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('User added successfully!');
       }
-      navigate('/users');
+      // navigate('/users');
     } catch (error) {
       console.error('Error saving user:', error);
       setError('Failed to save user');

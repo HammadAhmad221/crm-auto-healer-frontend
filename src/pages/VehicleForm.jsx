@@ -13,7 +13,7 @@ const VehicleForm = ({ isEdit }) => {
     year: '',
     vin: '',
     specialInstructions: '',
-    status: 'pending',
+    // status: 'pending',
   });
   const [error, setError] = useState('');
 
@@ -49,14 +49,16 @@ const VehicleForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('Vehicle updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/vehicles`, vehicle, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('Vehicle added successfully!');
       }
-      navigate('/vehicles');
+      // navigate('/vehicles');
     } catch (error) {
       console.error('Error saving vehicle:', error);
       setError('Failed to save vehicle because VIN value should be unique');
@@ -126,7 +128,7 @@ const VehicleForm = ({ isEdit }) => {
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Status</label>
           <select
             name="status"
@@ -134,14 +136,13 @@ const VehicleForm = ({ isEdit }) => {
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           >
-            {/* ['pending', 'picked-up', 'in-transit', 'delivered'] */}
             <option value="pending">Pending</option>
             <option value="picked-up">Picked-up</option>
             <option value="in-transit">in-transit</option>
             <option value="delivered">Delivered</option>
 
           </select>
-        </div>
+        </div> */}
         <div className="flex justify-end mt-8"> 
 
         <button

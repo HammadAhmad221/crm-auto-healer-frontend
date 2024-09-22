@@ -20,6 +20,7 @@ const InvoiceDetails = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
+        console.log(response.data);
         setInvoice(response.data);
       } catch (error) {
         console.error('Error fetching invoice:', error);
@@ -73,7 +74,7 @@ const InvoiceDetails = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
-            <p className="text-sm text-gray-500">Invoice #: {invoice._id}</p>
+            <p className="text-sm text-gray-500">Load Id: {invoice.loadId._id}</p>
             <p className="text-sm text-gray-500">Date: {new Date(invoice.date).toLocaleDateString()}</p>
           </div>
           <div className="text-right">
@@ -88,30 +89,33 @@ const InvoiceDetails = () => {
         {/* Bill To Section */}
         <div className="mb-8">
           <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
-          <p className="text-sm text-gray-600">{invoice.customerId.name}</p>
-          <p className="text-sm text-gray-600">{invoice.customerId.address.street}</p>
-          <p className="text-sm text-gray-600">{invoice.customerId.address.city}, {invoice.customerId.address.state}, {invoice.customerId.address.zipCode}</p>
+          <p className="text-sm text-gray-600">{invoice.customerId?.name}</p>
+          <p className="text-sm text-gray-600">{invoice.customerId?.address?.street}</p>
+          <p className="text-sm text-gray-600">{invoice.customerId?.address?.city}, {invoice.customerId?.address?.state}, {invoice.customerId?.address?.zipCode}</p>
         </div>
 
         {/* Invoice Details */}
-        <table className="w-full mb-8 border-collapse">
-          <thead>
-            <tr>
-              <th className="border-b-2 border-gray-300 text-left py-2 px-4 text-sm font-semibold text-gray-700">Description</th>
-              <th className="border-b-2 border-gray-300 text-right py-2 px-4 text-sm font-semibold text-gray-700">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700">Load from {invoice.loadId.pickupLocation}</td>
-              <td className="border-b border-gray-200 py-2 px-4 text-right text-sm text-gray-700">${invoice.amount.toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td className="py-2 px-4 text-sm text-gray-700 font-semibold">Total</td>
-              <td className="py-2 px-4 text-right text-sm text-gray-700 font-semibold">${invoice.amount.toFixed(2)}</td>
-            </tr>
-          </tbody>
-        </table>
+                  <table className="w-full mb-8 border-collapse">
+            <thead>
+              <tr>
+                <th className="border-b-2 border-gray-300 text-left py-2 px-4 text-sm font-semibold text-gray-700">Description</th>
+                <th className="border-b-2 border-gray-300 text-right py-2 px-4 text-sm font-semibold text-gray-700">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">FROM: {invoice.loadId?.pickupLocation}</td>
+                {/* <td className="border-b border-gray-200 py-2 px-4 text-right text-sm text-gray-700">${loadDetails.amount.toFixed(2) || 'N/A'}</td> */}
+              </tr>
+              <tr>
+                <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">TO: {invoice.loadId?.deliveryLocation}</td>
+                </tr>
+                <tr>
+                <td className="py-2 px-4 text-sm text-gray-700 font-semibold">Total</td>
+                <td className="py-2 px-4 text-right text-sm text-gray-700 font-semibold">${invoice?.amount.toFixed(2) || 'N/A'}</td>
+              </tr>
+            </tbody>
+          </table>
 
         {/* Payment Status */}
         <div className="mb-8">

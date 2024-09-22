@@ -221,7 +221,6 @@ const InvoiceForm = ({ isEdit }) => {
 
     fetchLoads();
   }, []);
-
   // Fetch the invoice data if in edit mode
   useEffect(() => {
     if (isEdit && id) {
@@ -259,14 +258,15 @@ const InvoiceForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('Invoice updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/invoices`, invoice, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
+        window.alert('Invoice added successfully!');
       }
-      navigate('/invoices');
     } catch (error) {
       console.error('Error saving invoice:', error);
     }

@@ -37,16 +37,16 @@ const CustomerDetails = () => {
       <h2 className="text-2xl font-semibold mb-4">Customer Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <p className="text-lg font-medium mb-2"><strong>Name:</strong> {customer.name}</p>
-          <p className="text-lg font-medium mb-2"><strong>Email:</strong> {customer.email}</p>
-          <p className="text-lg font-medium mb-2"><strong>Phone:</strong> {customer.phone}</p>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Name:</strong> {customer.name}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Email:</strong> {customer.email}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Phone:</strong> {customer.phone}</p><br/>
         </div>
         <div>
-          <p className="text-lg font-medium mb-2"><strong>Street:</strong> {customer.address?.street}</p>
-          <p className="text-lg font-medium mb-2"><strong>City:</strong> {customer.address?.city}</p>
-          <p className="text-lg font-medium mb-2"><strong>State:</strong> {customer.address?.state}</p>
-          <p className="text-lg font-medium mb-2"><strong>Zip Code:</strong> {customer.address?.zipCode}</p>
-          <p className="text-lg font-medium mb-2"><strong>Country:</strong> {customer.address?.country}</p>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Street:</strong> {customer.address?.street}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>City:</strong> {customer.address?.city}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>State:</strong> {customer.address?.state}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Zip Code:</strong> {customer.address?.zipCode}</p><br/>
+          <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Country:</strong> {customer.address?.country}</p><br/>
         </div>
       </div>
       <fieldset className="mb-6">
@@ -55,9 +55,9 @@ const CustomerDetails = () => {
           <ul className="list-disc list-inside pl-4">
             {customer.history.map((entry, index) => (
               <li key={index} className="mb-4">
-                <p><strong>Interaction Date:</strong> {new Date(entry.interactionDate).toLocaleDateString()}</p>
-                <p><strong>Notes:</strong> {entry.notes}</p>
-                <p><strong>Service Provided:</strong> {entry.serviceProvided}</p>
+                <p className='detailsTruncate'><strong>Interaction Date:</strong> {new Date(entry.interactionDate).toLocaleDateString()}</p><br/>
+                <p className='detailsTruncate'><strong>Notes:</strong> {entry.notes}</p><br/>
+                <p className='detailsTruncate'><strong>Service Provided:</strong> {entry.serviceProvided}</p><br/>
               </li>
             ))}
           </ul>
@@ -71,9 +71,9 @@ const CustomerDetails = () => {
           <ul className="list-disc list-inside pl-4">
             {customer.leads.map((lead, index) => (
               <li key={index} className="mb-4">
-                <p><strong>Lead Source:</strong> {lead.leadSource}</p>
-                <p><strong>Status:</strong> {lead.status}</p>
-                <p><strong>Follow-Up Date:</strong> {new Date(lead.followUpDate).toLocaleDateString()}</p>
+                <p className='detailsTruncate'><strong>Lead Source:</strong> {lead.leadSource}</p><br/>
+                <p className='detailsTruncate'><strong>Status:</strong> {lead.status}</p><br/>
+                <p className='detailsTruncate'><strong>Follow-Up Date:</strong> {new Date(lead.followUpDate).toLocaleDateString()}</p><br/>
               </li>
             ))}
           </ul>
@@ -93,7 +93,6 @@ const CustomerDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              // Optionally redirect or update state
               navigate('/customers');
             } catch (error) {
               console.error('Error deleting customer:', error);

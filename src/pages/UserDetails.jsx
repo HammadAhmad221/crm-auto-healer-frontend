@@ -39,19 +39,19 @@ const UserDetails = () => {
       <div className="bg-white p-4 border border-gray-200">
       <div className="mb-6">
         <strong className="block text-lg font-medium">Name:</strong>
-        <p>{user.name}</p>
+        <p className='detailsTruncate'>{user.name}</p>
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Email:</strong>
-        <p>{user.email}</p>
+        <p className='detailsTruncate'>{user.email}</p>
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Role:</strong>
-        <p>{user.role}</p>
+        <p className='detailsTruncate'>{user.role}</p>
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Joined:</strong>
-        <p>{new Date(user.date).toLocaleDateString()}</p>
+        <p className='detailsTruncate'>{new Date(user.date).toLocaleDateString()}</p>
       </div>
         <div className="flex justify-end mt-8">
         <Link 

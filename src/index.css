@@ -20,4 +20,17 @@
     background-color: #f1f1f1;
     border-radius: 6px;
   }
-  
+  .truncate {
+    display: inline-block;
+    max-width: 200px; /* Set the max width according to your design */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .detailsTruncate{
+    display: inline-block;
+    max-width: 35vw; /* Set the max width according to your design */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

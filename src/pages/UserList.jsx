@@ -63,17 +63,24 @@ const UserList = () => {
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {/* <Link to={`/users/${user._id}`} className="hover:bg-green-200 hover:border-green-400 bg-green-50 px-4 py-1 rounded-lg border border-green-200"> */}
+                {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     {user.name}
-                  {/* </Link> */}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                </td> */}
+                                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <span className="truncate max-w-xs" title={user.name}>{user.name}</span>
+                  </td>
+                {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {user.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                </td> */}
+                                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <span className="truncate max-w-xs" title={user.email}>{user.email}</span>
+                  </td>
+                {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {user.role}
-                </td>
+                </td> */}
+                                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <span className="truncate max-w-xs" title={user.role}>{user.role}</span>
+                  </td>
                 {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <Link 
                     to={`/users/${user._id}/edit`} 
@@ -82,7 +89,7 @@ const UserList = () => {
                     Edit
                   </Link>
                 </td> */}
-                                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
+                <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
                 <button 
                     onClick={()=>navigate(`/users/${user._id}`)} 
                     className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
@@ -104,7 +111,9 @@ const UserList = () => {
                     Authorization: localStorage.getItem('token'),
                   },
                 });
-                // navigate('/invoices');
+                setUsers((prevUsers) =>
+                  prevUsers.filter((c) => c._id !== user._id)
+                );
               } catch (error) {
                 console.error('Error deleting user:', error);
               }

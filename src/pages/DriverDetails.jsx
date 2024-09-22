@@ -42,11 +42,11 @@ const DriverDetails = () => {
       <h2 className="text-2xl font-semibold mb-4">Driver Details</h2>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Name:</strong>
-        <p>{driver.name}</p>
+        <p className='detailsTruncate'>{driver.name}</p>
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">License Number:</strong>
-        <p>{driver.licenseNumber}</p>
+        <p className='detailsTruncate'>{driver.licenseNumber}</p>
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Certifications:</strong>
@@ -62,8 +62,8 @@ const DriverDetails = () => {
       </div>
       <div className="mb-6">
         <strong className="block text-lg font-medium">Contact Details:</strong>
-        <p><strong>Phone Number:</strong> {driver.contactDetails.phoneNumber}</p>
-        <p><strong>Email:</strong> {driver.contactDetails.email}</p>
+        <p className='detailsTruncate'><strong>Phone Number:</strong> {driver.contactDetails.phoneNumber}</p><br/>
+        <p className='detailsTruncate'><strong>Email:</strong> {driver.contactDetails.email}</p>
       </div>
       <div className="flex justify-end mt-8">
         <Link 

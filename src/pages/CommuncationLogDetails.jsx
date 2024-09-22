@@ -45,7 +45,7 @@ const CommunicationLogDetails = () => {
     <>
     <HomeButton/>
     <BackButton/>
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg max-xl:mx-0">
       <h2 className="text-2xl font-semibold mb-6">Communication Log Details</h2>
       <div className="mb-4">
         <strong>Customer:</strong> {log.customerId.name}

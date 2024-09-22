@@ -32,6 +32,7 @@ import AssignedLoads from './pages/AssignedLoads';
 // import PersonalSchedule from './pages/PersonalSchedule'; 
 import ConditionReport from './pages/ConditionReports'; 
 import InvoiceStats from './pages/InvoiceStats';
+import GenerateInvoiceFromLoad from './pages/GenerateInvoiceFromLoads';
 
 function App() {
   return (
@@ -64,8 +65,10 @@ function App() {
       {/* Load routes */}
         <Route path="/loads" element={<LoadList />} />
         <Route path="/loads/new" element={<LoadForm isEdit={false} />} />
+        <Route path="/loads/generatedInvoice" element={<GenerateInvoiceFromLoad />} />
         <Route path="/loads/:id/edit" element={<LoadForm isEdit={true} />} />
         <Route path="/loads/:id" element={<LoadDetails />} />
+        
       {/* Quote routes */}
         {/* <Route path="/quotes" element={<QuoteList />} />
         <Route path="/quotes/new" element={<QuoteForm isEdit={false} />} />
