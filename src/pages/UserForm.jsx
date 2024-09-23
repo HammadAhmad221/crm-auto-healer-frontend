@@ -12,7 +12,7 @@ const UserForm = ({ isEdit }) => {
     name: '',
     email: '',
     password: '',
-    role: 'Driver',
+    role: 'Admin',
   });
   const [error, setError] = useState('');
 

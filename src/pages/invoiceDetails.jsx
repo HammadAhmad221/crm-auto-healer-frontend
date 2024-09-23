@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -8,7 +8,7 @@ import BackButton from '../components/BackButton';
 
 const InvoiceDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [invoice, setInvoice] = useState(null);
   const [error, setError] = useState('');
 
@@ -158,7 +158,9 @@ const InvoiceDetails = () => {
                     Authorization: localStorage.getItem('token'),
                   },
                 });
-                navigate('/invoices');
+                // navigate('/invoices');
+              window.alert('Invoice deleted successfully');
+
               } catch (error) {
                 console.error('Error deleting invoice:', error);
               }

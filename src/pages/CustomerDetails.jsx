@@ -93,7 +93,8 @@ const CustomerDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              navigate('/customers');
+              // navigate('/customers');
+              window.alert('Customer deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }

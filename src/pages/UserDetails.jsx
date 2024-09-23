@@ -69,7 +69,8 @@ const UserDetails = () => {
                 },
               });
               // Optionally redirect or update state
-              navigate('/users')
+              // navigate('/users')
+              window.alert('User deleted successfully');
 
             } catch (error) {
               console.error('Error deleting user:', error);

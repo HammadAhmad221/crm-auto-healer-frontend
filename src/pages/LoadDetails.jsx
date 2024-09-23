@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
-import { Link,useParams,useNavigate } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 
 const LoadDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [load, setLoad] = useState(null);
   const [error, setError] = useState('');
 
@@ -84,8 +84,8 @@ const LoadDetails = () => {
                 },
               });
               // Optionally redirect or update state
-              navigate('/loads')
-
+              // navigate('/loads')
+              window.alert('Load deleted successfully');
             } catch (error) {
               console.error('Error deleting load:', error);
             }

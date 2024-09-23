@@ -34,7 +34,8 @@ const VehicleDetails = () => {
           Authorization: localStorage.getItem('token'),
         },
       });
-      navigate('/vehicles');
+      // navigate('/vehicles');
+      window.alert('Vehicle deleted successfully');
     } catch (error) {
       console.error('Error deleting vehicle:', error);
     }

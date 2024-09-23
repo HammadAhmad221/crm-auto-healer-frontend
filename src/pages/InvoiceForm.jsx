@@ -167,14 +167,14 @@
 // export default InvoiceForm;
 
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 
 const InvoiceForm = ({ isEdit }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [invoice, setInvoice] = useState({
     customerId: '',
@@ -241,6 +241,14 @@ const InvoiceForm = ({ isEdit }) => {
     }
   }, [isEdit, id]);
 
+  // Truncate text to a specific length and add ellipses if it's too long
+const truncateText = (text, maxLength) => {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + '...';
+  }
+  return text;
+};
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInvoice((prevInvoice) => ({
@@ -292,7 +300,12 @@ const InvoiceForm = ({ isEdit }) => {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
-              <option value="">Select Customer</option>
+              {/* <option value="">Select Customer</option> */}
+              {isEdit ? (
+                <option value="">{invoice.customerId.name}</option>
+              ) : (
+                <option value="">Select a Customer</option>
+              )}
               {customers.map((customer) => (
                 <option key={customer._id} value={customer._id}>
                   {customer.name}
@@ -311,10 +324,16 @@ const InvoiceForm = ({ isEdit }) => {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
-              <option value="">Select Load</option>
+              {/* <option value="">Select Load</option> */}
+              {isEdit ? (
+                <option value="">{truncateText(invoice.loadId.loadId,1)} from {truncateText(invoice.loadId.pickupLocation,30)} to {truncateText(invoice.loadId.deliveryLocation,30)}</option>
+              ) : (
+                <option value="">Select a Load</option>
+              )}
               {loads.map((load) => (
                 <option key={load._id} value={load._id}>
-                  {load.loadId} from {load.pickupLocation} to {load.deliveryLocation}
+                  {/* {load.loadId} from {load.pickupLocation} to {load.deliveryLocation} */}
+                  {truncateText(load.loadId, 1)} from {truncateText(load.pickupLocation, 30)} to {truncateText(load.deliveryLocation, 30)}
                 </option>
               ))}
             </select>

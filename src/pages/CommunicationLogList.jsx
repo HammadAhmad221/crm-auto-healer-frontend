@@ -8,7 +8,7 @@
 //   const [logs, setLogs] = useState([]);
 
 //   useEffect(() => {
-    
+
 //     const fetchLogs = async () => {
 //       try {
 //         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/communicationLogs`, {
@@ -32,8 +32,8 @@
 
 // <div className="container mx-auto p-4">
 //       <h2 className="text-2xl font-semibold mb-6">Communication Logs</h2>
-//       <Link 
-//         to="/communicationLogs/new" 
+//       <Link
+//         to="/communicationLogs/new"
 //         className="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-800 mb-4 inline-block"
 //       >
 //         Add New Log
@@ -77,8 +77,8 @@
 //                   {new Date(log.date).toLocaleDateString()}
 //                 </td>
 //                 <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-//                   <Link 
-//                     to={`/communicationLogs/${log._id}/edit`} 
+//                   <Link
+//                     to={`/communicationLogs/${log._id}/edit`}
 //                     className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
 //                   >
 //                     Edit
@@ -95,7 +95,6 @@
 // };
 
 // export default CommunicationLogList;
-
 
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -142,7 +141,6 @@
 // };
 
 // export default EmailInbox;
-
 
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
@@ -196,8 +194,8 @@
 
 // export default EmailList;
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const EmailList = () => {
   const [emails, setEmails] = useState([]);
@@ -206,10 +204,12 @@ const EmailList = () => {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/emails`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}api/emails`
+        );
         setEmails(response.data);
       } catch (error) {
-        console.error('Error fetching emails:', error);
+        console.error("Error fetching emails:", error);
       } finally {
         setLoading(false);
       }
@@ -233,24 +233,16 @@ const EmailList = () => {
               >
                 <div className="flex-1">
                   <h3 className="font-semibold text-lg">{email.subject}</h3>
-                  <p className="text-gray-600">{email.from}</p>
+                  <p className="text-gray-600">TO: {email.to}</p>
                   <p className="text-sm text-gray-500">{email.date}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-700">{email.bodySnippet}</p>
                   {/* <a
                     href={`mailto:${email.from}`}
-                    className="text-blue-500 hover:underline mt-2 inline-block"
+                    className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out inline-block"
                   >
                     Reply
                   </a> */}
-                  <a
-  href={`mailto:${email.from}`}
-  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out inline-block"
->
-  Reply
-</a>
-
                 </div>
               </div>
             ))

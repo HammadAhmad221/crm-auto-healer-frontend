@@ -6,7 +6,7 @@ import BackButton from '../components/BackButton';
 
 const CustomerForm = ({ isEdit }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [customer, setCustomer] = useState({
     name: '',
     email: '',

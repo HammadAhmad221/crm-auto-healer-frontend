@@ -81,8 +81,8 @@ const DriverDetails = () => {
                 },
               });
               // Optionally redirect or update state
-              navigate('/drivers')
-
+              // navigate('/drivers')
+              window.alert('Driver deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }
