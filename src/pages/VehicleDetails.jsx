@@ -67,16 +67,15 @@ const VehicleDetails = () => {
         <strong className="block text-lg font-medium">Year:</strong>
         <p className='detailsTruncate'>{vehicle.year}</p>
       </div>
-        {/* <p className='detailsTruncate'><strong>Year:</strong> {vehicle.year}</p> */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
         <strong className="block text-lg font-medium">VIN:</strong>
         <p className='detailsTruncate'>{vehicle.vin}</p>
-      </div>
+      </div> */}
         {/* <p className='detailsTruncate'><strong>VIN:</strong> {vehicle.vin}</p> */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
         <strong className="block text-lg font-medium">Special Instructions:</strong>
         <p className='detailsTruncate'>{vehicle.specialInstructions}</p>
-      </div>
+      </div> */}
         {/* <p className='detailsTruncate'><strong>Special Instructions:</strong> {vehicle.specialInstructions}</p> */}
         {/* <div className="mb-6">
         <strong className="block text-lg font-medium">Status:</strong>

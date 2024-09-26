@@ -159,7 +159,7 @@
 // export default DriverForm;
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
@@ -175,8 +175,9 @@ const DriverForm = ({ isEdit }) => {
     },
   });
   const [phoneError, setPhoneError] = useState('');
+  const [certificationInput, setCertificationInput] = useState(driver.certifications.join(', '));
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -209,6 +210,15 @@ const DriverForm = ({ isEdit }) => {
         ...prev.contactDetails,
         [name]: value,
       }
+    }));
+  };
+
+  const handleCertificationsChange = (e) => {
+    const inputValue = e.target.value;
+    setCertificationInput(inputValue); // Store the raw input
+    setDriver(prev => ({
+      ...prev,
+      certifications: inputValue.split(',').map(cert => cert.trim())
     }));
   };
 
@@ -281,7 +291,7 @@ const DriverForm = ({ isEdit }) => {
           </div>
 
           <div className="mb-6">
-            <label className="block mb-2 text-lg font-medium">Certifications</label>
+            {/* <label className="block mb-2 text-lg font-medium">Certifications</label>
             <textarea
               name="certifications"
               value={driver.certifications.join(', ')}
@@ -291,11 +301,19 @@ const DriverForm = ({ isEdit }) => {
               }))}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               rows="3"
+            /> */}
+            <label className="block mb-2 text-lg font-medium">Certifications</label>
+            <textarea
+              name="certifications"
+              value={driver.certifications} // Bind raw input state
+              onChange={handleCertificationsChange}
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              rows="3"
             />
           </div>
 
           <fieldset className="mb-6">
-            <legend className="text-xl font-semibold mb-2">Contact Details</legend>
+            {/* <legend className="text-xl font-semibold mb-2">Contact Details</legend> */}
             <div className="mb-4">
               <label className="block mb-2 text-lg font-medium">Phone Number</label>
               <input

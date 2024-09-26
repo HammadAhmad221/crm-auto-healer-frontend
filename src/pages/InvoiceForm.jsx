@@ -241,7 +241,7 @@ const InvoiceForm = ({ isEdit }) => {
     }
   }, [isEdit, id]);
 
-  // Truncate text to a specific length and add ellipses if it's too long
+// Truncate text to a specific length and add ellipses if it's too long
 const truncateText = (text, maxLength) => {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + '...';
@@ -302,13 +302,13 @@ const truncateText = (text, maxLength) => {
             >
               {/* <option value="">Select Customer</option> */}
               {isEdit ? (
-                <option value="">{invoice.customerId.name}</option>
+                <option value={invoice.customerId._id}>{invoice.customerId?.name}</option>
               ) : (
                 <option value="">Select a Customer</option>
               )}
               {customers.map((customer) => (
                 <option key={customer._id} value={customer._id}>
-                  {customer.name}
+                  {customer?.name}
                 </option>
               ))}
             </select>
@@ -319,21 +319,21 @@ const truncateText = (text, maxLength) => {
             <label className="block text-sm font-medium text-gray-700">Load</label>
             <select
               name="loadId"
-              value={invoice.loadId}
+              value={invoice.loadId._id}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
               {/* <option value="">Select Load</option> */}
               {isEdit ? (
-                <option value="">{truncateText(invoice.loadId.loadId,1)} from {truncateText(invoice.loadId.pickupLocation,30)} to {truncateText(invoice.loadId.deliveryLocation,30)}</option>
+                <option value={invoice.loadId._id}>{invoice.loadId?.loadId} from ${invoice.loadId?.pickupLocation} to ${invoice.loadId?.deliveryLocation}</option>
               ) : (
                 <option value="">Select a Load</option>
               )}
               {loads.map((load) => (
                 <option key={load._id} value={load._id}>
                   {/* {load.loadId} from {load.pickupLocation} to {load.deliveryLocation} */}
-                  {truncateText(load.loadId, 1)} from {truncateText(load.pickupLocation, 30)} to {truncateText(load.deliveryLocation, 30)}
+                  {truncateText(load?.loadId, 1)} from {truncateText(load?.pickupLocation, 30)} to {truncateText(load?.deliveryLocation, 30)}
                 </option>
               ))}
             </select>
@@ -344,7 +344,7 @@ const truncateText = (text, maxLength) => {
             <input
               type="number"
               name="amount"
-              value={invoice.amount}
+              value={invoice?.amount}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
@@ -355,7 +355,7 @@ const truncateText = (text, maxLength) => {
             <label className="block text-sm font-medium text-gray-700">Status</label>
             <select
               name="status"
-              value={invoice.status}
+              value={invoice?.status}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required

@@ -308,20 +308,20 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <select
               name="vehicleId"
-              value={load.vehicleId}
+              value={load.vehicleId._id}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
               {/* <option value="">Select a Vehicle</option> */}
               {isEdit ? (
-                <option value="">{load.vehicleId.make}</option>
+                <option value=''>{load.vehicleId?.make}</option>
               ) : (
                 <option value="">Select a vehicle</option>
               )}
               {vehicles.map((vehicle) => (
                 <option key={vehicle._id} value={vehicle._id}>
-                  {vehicle.make}
+                  {vehicle?.make}
                 </option>
               ))}
             </select>
@@ -334,20 +334,20 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <select
               name="driverId"
-              value={load.driverId}
+              value={load?.driverId._id}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
               {/* <option value="">Select a Driver</option> */}
               {isEdit ? (
-                <option value="">{load.driverId.name}</option>
+                <option value="">{load.driverId?.name}</option>
               ) : (
                 <option value="">Select a Driver</option>
               )}
               {drivers.map((driver) => (
                 <option key={driver._id} value={driver._id}>
-                  {driver.name}
+                  {driver?.name}
                 </option>
               ))}
             </select>
@@ -360,20 +360,20 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <select
               name="customerId"
-              value={load.customerId} // Bind value to customerId in the state
+              value={load?.customerId._id} // Bind value to customerId in the state
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             >
               {/* <option value="">Select a Customer</option> */}
               {isEdit ? (
-                <option value="">{load.customerId.name}</option>
+                <option value="">{load.customerId?.name}</option>
               ) : (
                 <option value="">Select a Customer</option>
               )}
               {customers.map((customer) => (
                 <option key={customer._id} value={customer._id}>
-                  {customer.name} {/* Display customer name */}
+                  {customer?.name} {/* Display customer name */}
                 </option>
               ))}
             </select>
@@ -386,7 +386,7 @@ const LoadForm = ({ isEdit }) => {
             <input
               type="number"
               name="amount"
-              value={load.amount}
+              value={load?.amount}
               onChange={handleChange}
               // placeholder="1000"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -402,7 +402,7 @@ const LoadForm = ({ isEdit }) => {
             <input
               type="text"
               name="pickupLocation"
-              value={load.pickupLocation}
+              value={load?.pickupLocation}
               onChange={handleChange}
               // placeholder="Ichra, Lahore, Punjab, Pakistan"
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -416,7 +416,7 @@ const LoadForm = ({ isEdit }) => {
             <input
               type="text"
               name="deliveryLocation"
-              value={load.deliveryLocation}
+              value={load?.deliveryLocation}
               onChange={handleChange}
               // placeholder="Ali Town, Lahore, Punjab, Pakistan"
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -429,7 +429,7 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <textarea
               name="loadDetails"
-              value={load.loadDetails}
+              value={load?.loadDetails}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
@@ -440,7 +440,7 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <select
               name="status"
-              value={load.status}
+              value={load?.status}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >

@@ -55,9 +55,9 @@ const VehicleList = () => {
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Year
                 </th>
-                <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {/* <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   VIN
-                </th>
+                </th> */}
                 {/* <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th> */}
@@ -96,11 +96,11 @@ const VehicleList = () => {
                   {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {vehicle.vin}
                 </td> */}
-                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span className="truncate max-w-xs" title={vehicle.vin}>
                       {vehicle.vin}
                     </span>
-                  </td>
+                  </td> */}
                   {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   {vehicle.status}
                 </td> */}

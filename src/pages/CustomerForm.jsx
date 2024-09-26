@@ -130,7 +130,7 @@ const CustomerForm = ({ isEdit }) => {
           <input
             type="text"
             name="name"
-            value={customer.name}
+            value={customer?.name}
             onChange={handleChange}
             required
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -143,7 +143,7 @@ const CustomerForm = ({ isEdit }) => {
           <input
             type="email"
             name="email"
-            value={customer.email}
+            value={customer?.email}
             onChange={handleChange}
             required
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -156,14 +156,14 @@ const CustomerForm = ({ isEdit }) => {
           <input
             type="text"
             name="phone"
-            value={customer.phone}
+            value={customer?.phone}
             onChange={handleChange}
             required
             className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
         </label>
       </div>
-      <fieldset className="mb-6">
+      {/* <fieldset className="mb-6">
         <legend className="text-lg font-bold mb-2">Address</legend>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -172,7 +172,7 @@ const CustomerForm = ({ isEdit }) => {
               <input
                 type="text"
                 name="address.street"
-                value={customer.address.street}
+                value={customer?.address.street}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
@@ -184,7 +184,7 @@ const CustomerForm = ({ isEdit }) => {
               <input
                 type="text"
                 name="address.city"
-                value={customer.address.city}
+                value={customer?.address.city}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
@@ -196,7 +196,7 @@ const CustomerForm = ({ isEdit }) => {
               <input
                 type="text"
                 name="address.state"
-                value={customer.address.state}
+                value={customer?.address.state}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
@@ -208,7 +208,7 @@ const CustomerForm = ({ isEdit }) => {
               <input
                 type="text"
                 name="address.zipCode"
-                value={customer.address.zipCode}
+                value={customer?.address.zipCode}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
@@ -220,17 +220,17 @@ const CustomerForm = ({ isEdit }) => {
               <input
                 type="text"
                 name="address.country"
-                value={customer.address.country}
+                value={customer?.address.country}
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </label>
           </div>
         </div>
-      </fieldset>
-      <fieldset className="mb-6">
+      </fieldset> */}
+      {/* <fieldset className="mb-6">
         <legend className="text-lg font-bold mb-2">History</legend>
-        {customer.history.map((entry, index) => (
+        {customer?.history.map((entry, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Interaction Date:
@@ -263,10 +263,10 @@ const CustomerForm = ({ isEdit }) => {
             </label>
           </div>
         ))}
-      </fieldset>
-      <fieldset className="mb-6">
+      </fieldset> */}
+      {/* <fieldset className="mb-6">
         <legend className="text-lg font-bold mb-2">Leads</legend>
-        {customer.leads.map((lead, index) => (
+        {customer?.leads.map((lead, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Lead Source:
@@ -305,7 +305,7 @@ const CustomerForm = ({ isEdit }) => {
             </label>
           </div>
         ))}
-      </fieldset>
+      </fieldset> */}
       <div className="flex justify-end mt-8">
       <button
         type="submit"

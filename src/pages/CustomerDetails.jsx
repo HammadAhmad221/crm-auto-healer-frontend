@@ -41,15 +41,15 @@ const CustomerDetails = () => {
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Email:</strong> {customer.email}</p><br/>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Phone:</strong> {customer.phone}</p><br/>
         </div>
-        <div>
+        {/* <div>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Street:</strong> {customer.address?.street}</p><br/>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>City:</strong> {customer.address?.city}</p><br/>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>State:</strong> {customer.address?.state}</p><br/>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Zip Code:</strong> {customer.address?.zipCode}</p><br/>
           <p className="text-lg font-medium mb-2 detailsTruncate"><strong>Country:</strong> {customer.address?.country}</p><br/>
-        </div>
+        </div> */}
       </div>
-      <fieldset className="mb-6">
+      {/* <fieldset className="mb-6">
         <legend className="text-xl font-semibold mb-2">History</legend>
         {customer.history && customer.history.length > 0 ? (
           <ul className="list-disc list-inside pl-4">
@@ -80,7 +80,7 @@ const CustomerDetails = () => {
         ) : (
           <p>No leads available.</p>
         )}
-      </fieldset>
+      </fieldset> */}
       <div className="flex justify-end gap-4 mt-8">
         <Link to={`/customers/${id}/edit`} className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600">
           Edit Customer

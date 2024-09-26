@@ -61,7 +61,7 @@ const DriverDetails = () => {
         </ul>
       </div>
       <div className="mb-6">
-        <strong className="block text-lg font-medium">Contact Details:</strong>
+        {/* <strong className="block text-lg font-medium">Contact Details:</strong> */}
         <p className='detailsTruncate'><strong>Phone Number:</strong> {driver.contactDetails.phoneNumber}</p><br/>
         <p className='detailsTruncate'><strong>Email:</strong> {driver.contactDetails.email}</p>
       </div>
