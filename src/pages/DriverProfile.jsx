@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const ProfileManagement = () => {
   const [update,setUpdate] = useState();
@@ -86,7 +87,7 @@ const ProfileManagement = () => {
 <div className="min-h-screen bg-gray-100 px-4 pt-6">
       <h1 className="text-3xl font-bold mb-6">Profile Management</h1>
       {loading ? (
-        <p>Loading...</p>
+        <Loading/>
       ) : (
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Personal Information</h2>

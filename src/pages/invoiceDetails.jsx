@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const InvoiceDetails = () => {
   const { id } = useParams();
@@ -60,7 +61,7 @@ const InvoiceDetails = () => {
   }
 
   if (!invoice) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (

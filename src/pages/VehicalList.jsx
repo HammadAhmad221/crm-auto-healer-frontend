@@ -55,12 +55,6 @@ const VehicleList = () => {
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Year
                 </th>
-                {/* <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  VIN
-                </th> */}
-                {/* <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th> */}
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
@@ -69,49 +63,21 @@ const VehicleList = () => {
             <tbody>
               {vehicles.map((vehicle) => (
                 <tr key={vehicle._id}>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                    {vehicle.make}            
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span className="truncate max-w-xs" title={vehicle.make}>
                       {vehicle.make}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {vehicle.model}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span className="truncate max-w-xs" title={vehicle.model}>
                       {vehicle.model}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {vehicle.year}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span className="truncate max-w-xs" title={vehicle.year}>
                       {vehicle.year}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {vehicle.vin}
-                </td> */}
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                    <span className="truncate max-w-xs" title={vehicle.vin}>
-                      {vehicle.vin}
-                    </span>
-                  </td> */}
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {vehicle.status}
-                </td> */}
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link 
-                    to={`/vehicles/${vehicle._id}/edit`} 
-                    className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200"
-                  >
-                    Edit
-                  </Link>
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
                     <button
                       onClick={() => navigate(`/vehicles/${vehicle._id}`)}
@@ -143,7 +109,6 @@ const VehicleList = () => {
                                 },
                               }
                             );
-                            // navigate('/invoices');
                             setVehicles((prevVehicles) =>
                               prevVehicles.filter((c) => c._id !== vehicle._id)
                             );

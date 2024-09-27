@@ -118,7 +118,7 @@ const QuoteDetails = () => {
   }
 
   if (!quote) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (

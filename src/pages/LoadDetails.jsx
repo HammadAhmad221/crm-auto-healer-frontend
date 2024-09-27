@@ -4,6 +4,7 @@ import { Link,useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const LoadDetails = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const LoadDetails = () => {
   }
 
   if (!load) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (

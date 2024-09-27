@@ -196,6 +196,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const EmailList = () => {
   const [emails, setEmails] = useState([]);
@@ -218,7 +219,7 @@ const EmailList = () => {
     fetchEmails();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading/>;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">

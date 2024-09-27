@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const CommunicationLogDetails = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const CommunicationLogDetails = () => {
     }
   };
 
-  if (!log) return <p>Loading...</p>;
+  if (!log) return <Loading/>;
 
   return (
     <>

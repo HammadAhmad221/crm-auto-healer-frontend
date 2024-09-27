@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import { Link, useLocation } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const GenerateInvoiceFromLoad = () => {
   const location = useLocation();
@@ -79,7 +80,7 @@ const GenerateInvoiceFromLoad = () => {
   }
 
   if (!loadDetails || !customerDetails) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (

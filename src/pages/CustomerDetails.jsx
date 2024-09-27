@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const CustomerDetails = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const CustomerDetails = () => {
     fetchCustomer();
   }, [id]);
 
-  if (!customer) return <p className="text-center text-gray-500">Loading...</p>;
+  if (!customer) return <Loading/>;
 
   return (
 <>

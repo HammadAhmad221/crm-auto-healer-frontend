@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const UserDetails = () => {
     fetchUser();
   }, [id]);
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <Loading/>;
 
   return (
 <>

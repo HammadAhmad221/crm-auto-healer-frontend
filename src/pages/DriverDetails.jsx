@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import Loading from '../components/Loading';
 
 const DriverDetails = () => {
   const [driver, setDriver] = useState(null);
@@ -30,7 +31,7 @@ const DriverDetails = () => {
     fetchDriver();
   }, [id, navigate]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return < Loading/>;
   if (!driver) return <div>Driver not found</div>;
 
   return (
