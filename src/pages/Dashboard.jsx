@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+// import LogoutButton from '../components/Logout';
+import ProfileDropdown from '../components/ProfileDropdown';
 
 const AdminDashboard = () => {
   const [counts, setCounts] = useState();
@@ -24,8 +26,10 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 pt-1">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+    <div className="min-h-screen bg-gray-100 px-4 pt-4">
+      <h1 className="pl-4 text-3xl font-bold mb-6">Admin Dashboard</h1>
+      {/* <LogoutButton/> */}
+      <ProfileDropdown/>
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Manage Records</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
