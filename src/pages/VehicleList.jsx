@@ -5,9 +5,11 @@ import HomeButton from "../components/HomeButton";
 import BackButton from "../components/BackButton";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaEdit, FaInfoCircle } from "react-icons/fa";
+import Loading from "../components/Loading";
 
 const VehicleList = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +26,8 @@ const VehicleList = () => {
         setVehicles(response.data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -42,7 +46,7 @@ const VehicleList = () => {
         >
           Add New Vehicle
         </Link>
-        <div className="scrollbar-custom overflow-x-auto">
+{loading?(<Loading/>):(        <div className="scrollbar-custom overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
@@ -126,7 +130,7 @@ const VehicleList = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div>)}
       </div>
     </>
   );

@@ -4,12 +4,13 @@ import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
+
 
 const DriverDetails = () => {
   const [driver, setDriver] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDriver = async () => {
@@ -22,14 +23,13 @@ const DriverDetails = () => {
         setDriver(response.data);
       } catch (error) {
         console.error('Error fetching driver details:', error);
-        navigate('/drivers');
       } finally {
         setLoading(false);
       }
     };
 
     fetchDriver();
-  }, [id, navigate]);
+  }, [id]);
 
   if (loading) return < Loading/>;
   if (!driver) return <div>Driver not found</div>;
@@ -62,7 +62,6 @@ const DriverDetails = () => {
         </ul>
       </div>
       <div className="mb-6">
-        {/* <strong className="block text-lg font-medium">Contact Details:</strong> */}
         <p className='detailsTruncate'><strong>Phone Number:</strong> {driver.contactDetails.phoneNumber}</p><br/>
         <p className='detailsTruncate'><strong>Email:</strong> {driver.contactDetails.email}</p>
       </div>
@@ -81,9 +80,7 @@ const DriverDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              // Optionally redirect or update state
-              // navigate('/drivers')
-              window.alert('Driver deleted successfully');
+              toast.success('Driver deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }

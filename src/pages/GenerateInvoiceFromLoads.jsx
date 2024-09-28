@@ -117,16 +117,12 @@ const GenerateInvoiceFromLoad = () => {
             <p className="text-sm text-gray-500">Zelle - Cashapp - Credit card</p>
           </div>
         </div>
-
-          {/* Bill To Section */}
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
             <p className="text-sm text-gray-600">{customerDetails.name}</p>
             <p className="text-sm text-gray-600">{customerDetails.address.street}</p>
             <p className="text-sm text-gray-600">{customerDetails.address.city}, {customerDetails.address.state}, {customerDetails.address.zipCode}</p>
           </div>
-
-          {/* Load Details */}
           <table className="w-full mb-8 border-collapse">
             <thead>
               <tr>
@@ -137,7 +133,6 @@ const GenerateInvoiceFromLoad = () => {
             <tbody>
               <tr>
                 <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">FROM: {loadDetails.pickupLocation}</td>
-                {/* <td className="border-b border-gray-200 py-2 px-4 text-right text-sm text-gray-700">${loadDetails.amount.toFixed(2) || 'N/A'}</td> */}
               </tr>
               <tr>
                 <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">TO: {loadDetails.deliveryLocation}</td>
@@ -163,7 +158,7 @@ const GenerateInvoiceFromLoad = () => {
             <p className="mt-4">This is a computer-generated document and does not require a signature.</p>
           </div>
         </div>
-
+        
         {/* Action Button */}
         <div className="flex justify-end mt-8">
           <button

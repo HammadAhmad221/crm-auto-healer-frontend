@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
 import { Link,useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 const LoadDetails = () => {
   const { id } = useParams();
@@ -86,7 +86,7 @@ const LoadDetails = () => {
               });
               // Optionally redirect or update state
               // navigate('/loads')
-              window.alert('Load deleted successfully');
+              toast.success('Load deleted successfully');
             } catch (error) {
               console.error('Error deleting load:', error);
             }

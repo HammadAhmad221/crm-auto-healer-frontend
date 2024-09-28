@@ -191,9 +191,11 @@ import StatusDropdown from '../components/StatusDropdown';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import { FaTrash, FaEdit, FaInfoCircle, FaPrint } from 'react-icons/fa';
+import Loading from '../components/Loading';
 
 const LoadList = () => {
   const [loads, setLoads] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -207,6 +209,8 @@ const LoadList = () => {
         setLoads(response.data);
       } catch (error) {
         console.error('Error fetching loads:', error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -248,7 +252,7 @@ const LoadList = () => {
         >
           Add New Load
         </Link>
-        <div className="scrollbar-custom overflow-x-auto">
+{loading?(<Loading/>):(        <div className="scrollbar-custom overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
@@ -335,7 +339,7 @@ const LoadList = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div>)}
       </div>
     </>
   );

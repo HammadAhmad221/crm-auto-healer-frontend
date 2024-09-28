@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { toast } from 'react-toastify';
 
 const VehicleForm = ({ isEdit }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [vehicle, setVehicle] = useState({
     make: '',
     model: '',
     year: '',
-    vin: '',
-    specialInstructions: '',
-    // status: 'pending',
   });
   const [error, setError] = useState('');
 
@@ -49,19 +46,20 @@ const VehicleForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('Vehicle updated successfully!');
+        toast.success('Vehicle updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/vehicles`, vehicle, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('Vehicle added successfully!');
+        toast.success('Vehicle added successfully!');
       }
-      // navigate('/vehicles');
     } catch (error) {
       console.error('Error saving vehicle:', error);
-      setError('Failed to save vehicle because VIN value should be unique');
+      // toast.error('Failed to save vehicle because VIN value should be unique');
+        toast.error(error.response.data.message);
+      setError('Failed to save vehicle');
     }
   };
 
@@ -69,7 +67,6 @@ const VehicleForm = ({ isEdit }) => {
 <>
 <HomeButton/>
 <BackButton/>
-
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit Vehicle' : 'Add New Vehicle'}</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-200">
@@ -107,42 +104,6 @@ const VehicleForm = ({ isEdit }) => {
             required
           />
         </div>
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">VIN</label>
-          <input
-            type="text"
-            name="vin"
-            value={vehicle.vin}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div> */}
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Special Instructions</label>
-          <input
-            type="text"
-            name="specialInstructions"
-            value={vehicle.specialInstructions}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div> */}
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Status</label>
-          <select
-            name="status"
-            value={vehicle.status}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="pending">Pending</option>
-            <option value="picked-up">Picked-up</option>
-            <option value="in-transit">in-transit</option>
-            <option value="delivered">Delivered</option>
-
-          </select>
-        </div> */}
         <div className="flex justify-end mt-8"> 
 
         <button

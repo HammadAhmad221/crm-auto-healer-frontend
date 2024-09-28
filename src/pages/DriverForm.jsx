@@ -59,7 +59,7 @@
 //           Authorization: localStorage.getItem('token'),
 //         },
 //       })
-//         .then(() => {window.alert('Driver updated successfully!')})
+//         .then(() => {toast.success('Driver updated successfully!')})
 //         .catch(error => console.error('Error updating driver:', error));
 //     } else {
 //       axios.post(`${import.meta.env.VITE_BACKEND_URL}api/drivers`, driver, {
@@ -67,7 +67,7 @@
 //           Authorization: localStorage.getItem('token'),
 //         },
 //       })
-//         .then(() => { window.alert('Driver added successfully!')})
+//         .then(() => { toast.success('Driver added successfully!')})
 //         .catch(error => console.error('Error creating driver:', error));
 //     }
 //   };
@@ -163,6 +163,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { toast } from 'react-toastify';
 
 const DriverForm = ({ isEdit }) => {
   const [driver, setDriver] = useState({
@@ -245,7 +246,7 @@ const DriverForm = ({ isEdit }) => {
           Authorization: localStorage.getItem('token'),
         },
       })
-        .then(() => { window.alert('Driver updated successfully!') })
+        .then(() => { toast.success('Driver updated successfully!') })
         .catch(error => console.error('Error updating driver:', error));
     } else {
       axios.post(`${import.meta.env.VITE_BACKEND_URL}api/drivers`, driver, {
@@ -253,8 +254,10 @@ const DriverForm = ({ isEdit }) => {
           Authorization: localStorage.getItem('token'),
         },
       })
-        .then(() => { window.alert('Driver added successfully!') })
-        .catch(error => console.error('Error creating driver:', error));
+        .then(() => { toast.success('Driver added successfully!') })
+        .catch(error => {console.error('Error creating driver:', error)
+          toast.error('"License Number" should be unique');
+        });
     }
   };
 

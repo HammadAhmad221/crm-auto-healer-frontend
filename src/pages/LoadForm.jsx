@@ -193,6 +193,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import HomeButton from "../components/HomeButton";
 import BackButton from "../components/BackButton";
+import { toast } from 'react-toastify';
 
 const LoadForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -210,7 +211,6 @@ const LoadForm = ({ isEdit }) => {
   const [vehicles, setVehicles] = useState([]);
   const [drivers, setDrivers] = useState([]);
   const [customers, setCustomers] = useState([]); // State for customers
-  const [error, setError] = useState("");
 
   useEffect(() => {
     // Fetch vehicles, drivers, and customers for the dropdowns
@@ -272,17 +272,17 @@ const LoadForm = ({ isEdit }) => {
             headers: { Authorization: localStorage.getItem("token") },
           }
         );
-        window.alert("Load updated successfully!");
+        toast.success("Load updated successfully!");
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/loads`, load, {
           headers: { Authorization: localStorage.getItem("token") },
         });
-        window.alert("Load added successfully!");
+        toast.success("Load added successfully!");
       }
       // navigate('/loads');
     } catch (error) {
       console.error("Error saving load:", error);
-      setError("Failed to save load");
+      toast.error(error.response.data.message);
     }
   };
 
@@ -299,8 +299,6 @@ const LoadForm = ({ isEdit }) => {
           onSubmit={handleSubmit}
           className="bg-white p-4 border border-gray-200"
         >
-          {error && <p className="text-red-500">{error}</p>}
-
           {/* Vehicle Dropdown */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
@@ -341,7 +339,7 @@ const LoadForm = ({ isEdit }) => {
             >
               {/* <option value="">Select a Driver</option> */}
               {isEdit ? (
-                <option value="">{load.driverId?.name}</option>
+                <option value={load.driverId.name}>{load.driverId?.name}</option>
               ) : (
                 <option value="">Select a Driver</option>
               )}

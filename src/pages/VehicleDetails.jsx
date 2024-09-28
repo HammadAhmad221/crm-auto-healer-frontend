@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 const VehicleDetails = () => {
   const { id } = useParams();
@@ -36,7 +37,7 @@ const VehicleDetails = () => {
         },
       });
       // navigate('/vehicles');
-      window.alert('Vehicle deleted successfully');
+      toast.success('Vehicle deleted successfully');
     } catch (error) {
       console.error('Error deleting vehicle:', error);
     }

@@ -105,7 +105,7 @@ import DriverForm from './pages/DriverForm';
 import UserList from './pages/UserList'; 
 import UserDetails from './pages/UserDetails'; 
 import UserForm from './pages/UserForm'; 
-import VehicleList from './pages/VehicalList';
+import VehicleList from './pages/VehicleList';
 import VehicleDetails from './pages/VehicleDetails';
 import VehicleForm from './pages/VehicleForm';
 import LoadList from './pages/LoadList';
@@ -114,13 +114,7 @@ import LoadForm from './pages/LoadForm';
 import InvoiceList from './pages/InvoiceList';
 import InvoiceForm from './pages/InvoiceForm';
 import InvoiceDetails from './pages/invoiceDetails';
-import CommunicationLogList from './pages/CommunicationLogList';
-import CommunicationLogDetails from './pages/CommuncationLogDetails';
-import CommunicationLogForm from './pages/CommunicationLogForm';
-import DriverDashboard from './pages/DriverDashboard';
-import DriverProfile from './pages/DriverProfile';
-import AssignedLoads from './pages/AssignedLoads';
-import ConditionReport from './pages/ConditionReports'; 
+import CommunicationLogs from './pages/CommunicationLogs';
 import InvoiceStats from './pages/InvoiceStats';
 import GenerateInvoiceFromLoad from './pages/GenerateInvoiceFromLoads';
 import ProtectedRoute from './ProtectedRoutes';
@@ -361,65 +355,7 @@ function App() {
           path="/communicationlogs"
           element={
             <ProtectedRoute>
-              <CommunicationLogList />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/communicationlogs/new"
-          element={
-            <ProtectedRoute>
-              <CommunicationLogForm isEdit={false} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/communicationlogs/:id/edit"
-          element={
-            <ProtectedRoute>
-              <CommunicationLogForm isEdit={true} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/communicationlogs/:id"
-          element={
-            <ProtectedRoute>
-              <CommunicationLogDetails />
-            </ProtectedRoute>
-          }
-        />
-        {/* Driver routes */}
-        <Route
-          path="/driver-dashboard"
-          element={
-            <ProtectedRoute>
-              <DriverDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <DriverProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/assigned-loads"
-          element={
-            <ProtectedRoute>
-              <AssignedLoads />
-            </ProtectedRoute>
-          }
-        />
-        {/* <Route path="/schedule" element={<PersonalSchedule />} /> */}
-        <Route
-          path="/condition-reports/:loadId"
-          element={
-            <ProtectedRoute>
-              <ConditionReport />
+              <CommunicationLogs />
             </ProtectedRoute>
           }
         />

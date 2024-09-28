@@ -1,14 +1,14 @@
 // src/pages/UserDetails.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 const UserDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const UserDetails = () => {
               });
               // Optionally redirect or update state
               // navigate('/users')
-              window.alert('User deleted successfully');
+              toast.success('User deleted successfully');
 
             } catch (error) {
               console.error('Error deleting user:', error);

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 const CustomerDetails = () => {
   const { id } = useParams();
   const [customer, setCustomer] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCustomer = async () => {
@@ -94,8 +94,7 @@ const CustomerDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              // navigate('/customers');
-              window.alert('Customer deleted successfully');
+              toast.success('Customer deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }

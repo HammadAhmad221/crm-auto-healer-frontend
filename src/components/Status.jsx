@@ -10,7 +10,7 @@ const Status = ({ initialStatus, onStatusChange }) => {
             await onStatusChange(newStatus); // Notify parent component about the status change
         } catch (error) {
             console.error('Error updating status:', error);
-            // Optionally handle error (e.g., show an alert or revert status)
+            // Optionally handle error (e.g., show an success or revert status)
         }
     };
 

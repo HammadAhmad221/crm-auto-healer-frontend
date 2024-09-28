@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { toast } from 'react-toastify';
 
 const UserForm = ({ isEdit }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: '',
     email: '',
     password: '',
     role: 'Admin',
   });
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
 
   useEffect(() => {
     if (isEdit) {
@@ -47,19 +47,19 @@ const UserForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('User updated successfully!');
+        toast.success('User updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/users`, user, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('User added successfully!');
+        toast.success('User added successfully!');
       }
-      // navigate('/users');
     } catch (error) {
       console.error('Error saving user:', error);
-      setError('Failed to save user');
+      toast.error('User with this "Email" already exists');
+      // setError('Failed to save user');
     }
   };
 
@@ -71,7 +71,7 @@ const UserForm = ({ isEdit }) => {
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit User' : 'Add New User'}</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-200">
-        {error && <p className="text-red-500">{error}</p>}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Name</label>
           <input

@@ -171,6 +171,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
+import { toast } from 'react-toastify';
 
 const InvoiceForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -213,7 +214,7 @@ const InvoiceForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        setLoads(response.data); // Assuming response data contains loads
+        setLoads(response.data);
       } catch (error) {
         console.error('Error fetching loads:', error);
       }
@@ -266,17 +267,18 @@ const truncateText = (text, maxLength) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('Invoice updated successfully!');
+        toast.success('Invoice updated successfully!');
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/invoices`, invoice, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        window.alert('Invoice added successfully!');
+        toast.success('Invoice added successfully!');
       }
     } catch (error) {
       console.error('Error saving invoice:', error);
+      toast.error(error.response.data.message);
     }
   };
 

@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 const InvoiceDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,6 @@ const InvoiceDetails = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        console.log(response.data);
         setInvoice(response.data);
       } catch (error) {
         console.error('Error fetching invoice:', error);
@@ -160,7 +160,7 @@ const InvoiceDetails = () => {
                   },
                 });
                 // navigate('/invoices');
-              window.alert('Invoice deleted successfully');
+              toast.success('Invoice deleted successfully');
 
               } catch (error) {
                 console.error('Error deleting invoice:', error);

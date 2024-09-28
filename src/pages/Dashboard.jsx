@@ -124,9 +124,6 @@ const AdminDashboard = () => {
               <h3 className="text-xl mb-2 font-bold text-white">Communication Logs</h3>
               <h3 className='text-xl font-bold text-white'>{counts?.communicationlog}</h3>
             </div>
-            <ul>
-              <li><Link to="/communicationlogs/new" className="text-white font-bold hover:underline">Add New</Link></li>
-            </ul>
           </Link>
         </div>
       </div>

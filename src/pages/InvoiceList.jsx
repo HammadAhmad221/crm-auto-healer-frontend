@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaEdit, FaInfoCircle } from "react-icons/fa";
+import Loading from "../components/Loading";
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
+  const [loading,setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +27,8 @@ const InvoiceList = () => {
         setInvoices(response.data);
       } catch (error) {
         console.error("Error fetching invoices:", error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -70,7 +74,7 @@ const InvoiceList = () => {
         >
           Add New Invoice
         </Link>
-        <div className="scrollbar-custom overflow-x-auto">
+{loading?(<Loading/>):(        <div className="scrollbar-custom overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
@@ -106,9 +110,6 @@ const InvoiceList = () => {
             <tbody>
               {invoices.map((invoice) => (
                 <tr key={invoice._id}>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                   {invoice._id}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -117,9 +118,6 @@ const InvoiceList = () => {
                       {invoice._id}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.customerId?.name}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -128,9 +126,6 @@ const InvoiceList = () => {
                       {invoice.customerId?.name}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId?.loadId}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -139,9 +134,6 @@ const InvoiceList = () => {
                       {invoice.loadId?.loadId}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId?.pickupLocation}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -150,9 +142,6 @@ const InvoiceList = () => {
                       {invoice.loadId?.pickupLocation}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  {invoice.loadId?.deliveryLocation}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -161,9 +150,6 @@ const InvoiceList = () => {
                       {invoice.loadId?.deliveryLocation}
                     </span>
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  ${invoice?.amount.toFixed(2)}
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     <span
                       className="truncate max-w-xs hover:bg-gray-100"
@@ -184,11 +170,6 @@ const InvoiceList = () => {
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                     {new Date(invoice.date).toLocaleDateString()}
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                  <Link to={`/invoices/${invoice._id}/edit`} className="hover:bg-yellow-200 hover:border-yellow-400 bg-yellow-50 px-4 py-1 rounded-lg border border-yellow-200">
-                    Edit
-                  </Link>
-                </td> */}
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
                     <button
                       onClick={() => navigate(`/invoices/${invoice._id}`)}
@@ -220,7 +201,6 @@ const InvoiceList = () => {
                                 },
                               }
                             );
-                            // navigate('/invoices');
                             setInvoices((prevInvoices) =>
                               prevInvoices.filter((c) => c._id !== invoice._id)
                             );
@@ -238,7 +218,7 @@ const InvoiceList = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div>)}
       </div>
     </>
   );
