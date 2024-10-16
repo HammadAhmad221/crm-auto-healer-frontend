@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
-import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const VehicleDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [vehicle, setVehicle] = useState(null);
+  const [showCustomerDetails, setShowCustomerDetails] = useState(false);
+
+  // Function to toggle the visibility
+  const toggleCustomerDetails = () => {
+    setShowCustomerDetails(prevState => !prevState);
+  };
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -59,31 +65,32 @@ const VehicleDetails = () => {
         <strong className="block text-lg font-medium">Make:</strong>
         <p className='detailsTruncate'>{vehicle.make}</p>
       </div>
-        {/* <p className='detailsTruncate'><strong>Make:</strong> {vehicle.make}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">Model:</strong>
         <p className='detailsTruncate'>{vehicle.model}</p>
       </div> 
-        {/* <p className='detailsTruncate'><strong>Model:</strong> {vehicle.model}</p> */}
         <div className="mb-6">
         <strong className="block text-lg font-medium">Year:</strong>
         <p className='detailsTruncate'>{vehicle.year}</p>
       </div>
-        {/* <div className="mb-6">
-        <strong className="block text-lg font-medium">VIN:</strong>
-        <p className='detailsTruncate'>{vehicle.vin}</p>
-      </div> */}
-        {/* <p className='detailsTruncate'><strong>VIN:</strong> {vehicle.vin}</p> */}
-        {/* <div className="mb-6">
-        <strong className="block text-lg font-medium">Special Instructions:</strong>
-        <p className='detailsTruncate'>{vehicle.specialInstructions}</p>
-      </div> */}
-        {/* <p className='detailsTruncate'><strong>Special Instructions:</strong> {vehicle.specialInstructions}</p> */}
-        {/* <div className="mb-6">
-        <strong className="block text-lg font-medium">Status:</strong>
-        <p className='detailsTruncate'>{vehicle.status}</p>
-      </div> */}
-        {/* <p className='detailsTruncate'><strong>Status:</strong> {vehicle.status}</p> */}
+          <div className="mb-6">
+      <strong className="block text-lg font-medium text-gray-700">Customer:</strong>
+
+      <p 
+        className="detailsTruncate cursor-pointer hover:text-blue-800 hover:underline transition-colors duration-200 select-none" 
+        onClick={toggleCustomerDetails}
+      >
+        {vehicle?.customer?.name}
+      </p>
+
+      {showCustomerDetails && (
+        <div className="p-4 bg-gray-100 rounded-lg shadow-sm transition-all duration-300 ease-in-out">
+          <p className="text-lg text-gray-600"><strong>Name:</strong> {vehicle?.customer?.name}</p>
+          <p className="text-lg text-gray-600"><strong>Email:</strong> {vehicle?.customer?.email}</p>
+          <p className="text-lg text-gray-600"><strong>Phone:</strong> {vehicle?.customer?.phone}</p>
+        </div>
+      )}
+    </div>
       </div>
       <div className="flex justify-end mt-6">
       <Link 

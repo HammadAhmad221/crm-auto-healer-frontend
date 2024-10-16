@@ -115,7 +115,7 @@ const InvoiceList = () => {
                       className="truncate max-w-xs hover:bg-gray-100"
                       title={invoice._id}
                     >
-                      {invoice._id}
+                      {invoice?.invoiceId}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">

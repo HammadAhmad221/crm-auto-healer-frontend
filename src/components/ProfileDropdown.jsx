@@ -28,7 +28,7 @@ const ProfileDropdown = () => {
             <span className=" text-gray-900 font-semibold">{username}</span>
           </div>
           <div className="border-t"></div>
-          <div className="py-2 flex items-center justify-center">
+          <div className="py-2 flex items-center justify-center"> 
             <LogoutButton/>
           </div>
         </div>

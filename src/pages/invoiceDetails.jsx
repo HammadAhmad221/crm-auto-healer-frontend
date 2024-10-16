@@ -12,6 +12,7 @@ const InvoiceDetails = () => {
   const { id } = useParams();
   // const navigate = useNavigate();
   const [invoice, setInvoice] = useState(null);
+  const[vehicle, setVehicle] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -23,12 +24,23 @@ const InvoiceDetails = () => {
           },
         });
         setInvoice(response.data);
+        console.log(response.data);
+try{
+  const vehicle = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/vehicles/${response?.data?.loadId?.vehicleId}`, {
+    headers: {
+      Authorization: localStorage.getItem('token'),
+    },
+  });
+  setVehicle(vehicle.data);
+  console.log("Vehicle",vehicle.data);
+}catch(error){
+  console.log(error);
+}
       } catch (error) {
         console.error('Error fetching invoice:', error);
         setError('Failed to fetch invoice details');
       }
     };
-
     fetchInvoice();
   }, [id]);
 
@@ -51,11 +63,9 @@ const InvoiceDetails = () => {
       const y = 10; 
   
       pdf.addImage(imgData, 'PNG', x, y, imgWidth * ratio, imgHeight * ratio);
-      pdf.save(`invoice_${invoice._id}.pdf`);
+      pdf.save(`invoice_${invoice?.invoiceId}.pdf`);
     });
   };
-  
-
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
@@ -72,13 +82,13 @@ const InvoiceDetails = () => {
 <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <div id="invoice-pdf" className="p-8 border border-gray-300">
         {/* Header Section */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 flex-wrap">
           <div>
             <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
-            <p className="text-sm text-gray-500">Load Id: {invoice.loadId._id}</p>
+            <p className="text-sm text-gray-500">Invoice Id: {invoice?.invoiceId}</p>
             <p className="text-sm text-gray-500">Date: {new Date(invoice.date).toLocaleDateString()}</p>
           </div>
-          <div className="text-right">
+          <div className="md:text-right sm:text-left">
             <h2 className="text-2xl font-semibold text-gray-800">Drive point logistics Llc</h2>
             <p className="text-sm text-gray-500">Phone: 407-809-5670</p>
             <Link to='https://drivepointlogistics.com' className="text-sm text-gray-500">https://drivepointlogistics.com</Link>
@@ -87,13 +97,23 @@ const InvoiceDetails = () => {
           </div>
         </div>
 
-        {/* Bill To Section */}
-        <div className="mb-8">
+      <div className='flex items-center justify-between flex-wrap'>
+                {/* Bill To Section */}
+                <div className="mb-8">
           <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
-          <p className="text-sm text-gray-600">{invoice.customerId?.name}</p>
-          <p className="text-sm text-gray-600">{invoice.customerId?.address?.street}</p>
-          <p className="text-sm text-gray-600">{invoice.customerId?.address?.city}, {invoice.customerId?.address?.state}, {invoice.customerId?.address?.zipCode}</p>
+          <p className="text-sm text-gray-600">Name: {invoice.customerId?.name}</p>
+          <p className="text-sm text-gray-600">Email: {invoice.customerId?.email}</p>
+          <p className="text-sm text-gray-600">Contact: {invoice.customerId?.phone}</p>
         </div>
+        {/* Vehicle */}
+        <div className="mb-8">
+          <h3 className="text-lg font-medium text-gray-700">Vehicle Info:</h3>
+          <p className="text-sm text-gray-600">Model: {vehicle?.model}</p>
+          <p className="text-sm text-gray-600">Make: {vehicle?.make}</p>
+          <p className="text-sm text-gray-600">Vin: {vehicle?.vin}</p>
+          <p className="text-sm text-gray-600">Year: {vehicle?.year}</p>
+        </div>
+      </div>
 
         {/* Invoice Details */}
                   <table className="w-full mb-8 border-collapse">
@@ -142,8 +162,7 @@ const InvoiceDetails = () => {
           Download PDF
         </button>
         {localStorage.getItem("token") &&
-        <>
-
+        <div className='flex'>
          <Link
           to={`/invoices/${invoice._id}/edit`}
           className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600 mr-4"
@@ -171,7 +190,7 @@ const InvoiceDetails = () => {
         >
           Delete
         </button>
-        </>
+        </div>
         }
       </div>
     </div>

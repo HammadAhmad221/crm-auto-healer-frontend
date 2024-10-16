@@ -337,9 +337,9 @@ function App() {
         <Route
           path="/invoices/:id"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <InvoiceDetails />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route

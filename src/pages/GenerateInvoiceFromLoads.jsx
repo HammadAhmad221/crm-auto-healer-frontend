@@ -90,19 +90,6 @@ const GenerateInvoiceFromLoad = () => {
 
       <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <div id="invoice-pdf" className="p-8 border border-gray-300">
-          {/* Invoice Header */}
-          {/* <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
-              <p className="text-sm text-gray-500">Load ID: {loadDetails._id}</p>
-              <p className="text-sm text-gray-500">Date: {new Date().toLocaleDateString()}</p>
-            </div>
-            <div className="text-right">
-              <h2 className="text-2xl font-semibold text-gray-800">Drive Point Logistics LLC</h2>
-              <p className="text-sm text-gray-500">Phone: 407-809-5670</p>
-              <p className="text-sm text-gray-500">Payment methods: Zelle, Cashapp, Credit Card</p>
-            </div>
-          </div> */}
                   <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
