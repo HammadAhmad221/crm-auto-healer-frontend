@@ -1,6 +1,6 @@
 // src/pages/UserDetails.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 const UserDetails = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -33,7 +34,7 @@ const UserDetails = () => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/users"/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">User Details</h2>
@@ -70,8 +71,8 @@ const UserDetails = () => {
                 },
               });
               // Optionally redirect or update state
-              // navigate('/users')
-              toast.success('User deleted successfully');
+              navigate('/users');
+              // toast.success('User deleted successfully');
 
             } catch (error) {
               console.error('Error deleting user:', error);

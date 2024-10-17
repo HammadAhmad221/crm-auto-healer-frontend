@@ -42,8 +42,8 @@ const VehicleDetails = () => {
           Authorization: localStorage.getItem('token'),
         },
       });
-      // navigate('/vehicles');
-      toast.success('Vehicle deleted successfully');
+      navigate('/vehicles');
+      // toast.success('Vehicle deleted successfully');
     } catch (error) {
       console.error('Error deleting vehicle:', error);
     }
@@ -56,7 +56,7 @@ const VehicleDetails = () => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/vehicles"/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Vehicle Details</h2>

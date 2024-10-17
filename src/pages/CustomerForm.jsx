@@ -4,10 +4,12 @@ import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const CustomerForm = ({ isEdit }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState({
     name: '',
     email: '',
@@ -55,9 +57,11 @@ const CustomerForm = ({ isEdit }) => {
     })
       .then(() => {
         if (isEdit) {
-          toast.success('Customer updated successfully!');
+          // toast.success('Customer updated successfully!');
+          navigate('/customers')
         } else {
-          toast.success('Customer added successfully!');
+          // toast.success('Customer added successfully!');
+          navigate("/customers")
         }
       })
       .catch(error => {console.error('Error saving customer:', error)
@@ -69,7 +73,7 @@ const CustomerForm = ({ isEdit }) => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto='/customers'/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">{isEdit ? 'Edit Customer' : 'Add New Customer'}</h2>

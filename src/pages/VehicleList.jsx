@@ -52,7 +52,7 @@ const VehicleList = () => {
   return (
     <>
       <HomeButton />
-      <BackButton />
+      <BackButton backto="/admin"/>
       <div className="container mx-auto p-4">
         <h2 className="text-2xl font-semibold mb-6">Vehicles</h2>
         <Link

@@ -164,6 +164,7 @@ import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const DriverForm = ({ isEdit }) => {
   const [driver, setDriver] = useState({
@@ -178,7 +179,7 @@ const DriverForm = ({ isEdit }) => {
   const [phoneError, setPhoneError] = useState('');
   const [certificationInput, setCertificationInput] = useState(driver.certifications.join(', '));
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -246,7 +247,10 @@ const DriverForm = ({ isEdit }) => {
           Authorization: localStorage.getItem('token'),
         },
       })
-        .then(() => { toast.success('Driver updated successfully!') })
+        .then(() => {
+          //  toast.success('Driver updated successfully!') 
+          navigate("/drivers")
+          })
         .catch(error => console.error('Error updating driver:', error));
     } else {
       axios.post(`${import.meta.env.VITE_BACKEND_URL}api/drivers`, driver, {
@@ -254,7 +258,10 @@ const DriverForm = ({ isEdit }) => {
           Authorization: localStorage.getItem('token'),
         },
       })
-        .then(() => { toast.success('Driver added successfully!') })
+        .then(() => { 
+          navigate("/drivers")
+          // toast.success('Driver added successfully!') 
+        })
         .catch(error => {console.error('Error creating driver:', error)
           toast.error('"License Number" should be unique');
         });
@@ -264,7 +271,7 @@ const DriverForm = ({ isEdit }) => {
   return (
     <>
       <HomeButton />
-      <BackButton />
+      <BackButton backto="/drivers"/>
 
       <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">{isEdit ? 'Edit Driver' : 'Add New Driver'}</h2>

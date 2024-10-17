@@ -12,7 +12,7 @@ const GenerateInvoiceFromLoad = () => {
   const { loadId, customerId, amount } = location.state || {};
   
   const [loadDetails, setLoadDetails] = useState(null);
-  const [customerDetails, setCustomerDetails] = useState(null);
+  // const [customerDetails, setCustomerDetails] = useState(null);
   const [error, setError] = useState('');
   const invoiceData ={
     customerId,
@@ -34,24 +34,25 @@ const GenerateInvoiceFromLoad = () => {
       try {
         const loadResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/loads/${loadId}`);
         setLoadDetails(loadResponse.data);
+        console.log(loadResponse.data);
       } catch (error) {
         console.error('Error fetching load details:', error);
         setError('Failed to fetch load details');
       }
     };
 
-    const fetchCustomerDetails = async () => {
-      try {
-        const customerResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/customers/${customerId}`);
-        setCustomerDetails(customerResponse.data);
-      } catch (error) {
-        console.error('Error fetching customer details:', error);
-        setError('Failed to fetch customer details');
-      }
-    };
+    // const fetchCustomerDetails = async () => {
+    //   try {
+    //     const customerResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/customers/${customerId}`);
+    //     setCustomerDetails(customerResponse.data);
+    //   } catch (error) {
+    //     console.error('Error fetching customer details:', error);
+    //     setError('Failed to fetch customer details');
+    //   }
+    // };
     createInvoice();
     fetchLoadDetails();
-    fetchCustomerDetails();
+    // fetchCustomerDetails();
   }, [loadId, customerId]);
 
   const downloadPdf = () => {
@@ -79,24 +80,28 @@ const GenerateInvoiceFromLoad = () => {
     return <p className="text-red-500">{error}</p>;
   }
 
-  if (!loadDetails || !customerDetails) {
+  if (!loadDetails) {
     return <Loading/>;
+  }
+
+  if(!loadDetails?.invoiceId){
+    return <p>No Invoice created for this Load</p>
   }
 
   return (
     <>
       <HomeButton />
-      <BackButton />
+      <BackButton backto="/loads"/>
 
       <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <div id="invoice-pdf" className="p-8 border border-gray-300">
-                  <div className="flex justify-between items-center mb-8">
+                  <div className="flex justify-between items-center mb-8 flex-wrap">
           <div>
             <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
-            <p className="text-sm text-gray-500">Load ID: {loadDetails._id}</p>
+            <p className="text-sm text-gray-500">Invoice Id: {loadDetails?.invoiceId?.invoiceId}</p>
             <p className="text-sm text-gray-500">Date: {new Date().toLocaleDateString()}</p>
           </div>
-          <div className="text-right">
+          <div className="md:text-right sm:text-left">
             <h2 className="text-2xl font-semibold text-gray-800">Drive point logistics Llc</h2>
             <p className="text-sm text-gray-500">Phone: 407-809-5670</p>
             <Link to='https://drivepointlogistics.com' className="text-sm text-gray-500">https://drivepointlogistics.com</Link>
@@ -104,11 +109,20 @@ const GenerateInvoiceFromLoad = () => {
             <p className="text-sm text-gray-500">Zelle - Cashapp - Credit card</p>
           </div>
         </div>
+          <div className='flex items-center justify-between flex-wrap'>
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
-            <p className="text-sm text-gray-600">{customerDetails.name}</p>
-            <p className="text-sm text-gray-600">{customerDetails.address.street}</p>
-            <p className="text-sm text-gray-600">{customerDetails.address.city}, {customerDetails.address.state}, {customerDetails.address.zipCode}</p>
+            <p className="text-sm text-gray-600">{loadDetails?.customerId?.name}</p>
+            <p className="text-sm text-gray-600">{loadDetails?.customerId?.email}</p>
+            <p className="text-sm text-gray-600">{loadDetails?.customerId?.phone}</p>
+          </div>
+        {/* Vehicle */}
+        <div className="mb-8">
+          <h3 className="text-lg font-medium text-gray-700">Vehicle Info:</h3>
+          <p className="text-sm text-gray-600">Model: {loadDetails?.vehicleId?.model}</p>
+          <p className="text-sm text-gray-600">Make: {loadDetails?.vehicleId?.make}</p>
+          <p className="text-sm text-gray-600">Year: {loadDetails?.vehicleId?.year}</p>
+        </div>
           </div>
           <table className="w-full mb-8 border-collapse">
             <thead>
@@ -126,7 +140,7 @@ const GenerateInvoiceFromLoad = () => {
                 </tr>
                 <tr>
                 <td className="py-2 px-4 text-sm text-gray-700 font-semibold">Total</td>
-                <td className="py-2 px-4 text-right text-sm text-gray-700 font-semibold">${amount.toFixed(2) || 'N/A'}</td>
+                <td className="py-2 px-4 text-right text-sm text-gray-700 font-semibold">${loadDetails?.amount.toFixed(2) || 'N/A'}</td>
               </tr>
             </tbody>
           </table>

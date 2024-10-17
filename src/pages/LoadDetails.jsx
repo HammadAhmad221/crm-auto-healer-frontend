@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link,useParams } from 'react-router-dom';
+import { Link,useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const LoadDetails = () => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [load, setLoad] = useState(null);
   const [error, setError] = useState('');
 
@@ -41,7 +41,7 @@ const LoadDetails = () => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/loads"/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Load Details</h2>
@@ -85,8 +85,8 @@ const LoadDetails = () => {
                 },
               });
               // Optionally redirect or update state
-              // navigate('/loads')
-              toast.success('Load deleted successfully');
+              navigate('/loads')
+              // toast.success('Load deleted successfully');
             } catch (error) {
               console.error('Error deleting load:', error);
             }

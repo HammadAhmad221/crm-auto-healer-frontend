@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
@@ -13,6 +13,7 @@ const VehicleForm = ({ isEdit }) => {
     year: '',
   });
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isEdit) {
@@ -46,14 +47,16 @@ const VehicleForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('Vehicle updated successfully!');
+        // toast.success('Vehicle updated successfully!');
+        navigate('/vehicles')
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/vehicles`, vehicle, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('Vehicle added successfully!');
+        navigate('/vehicles')
+        // toast.success('Vehicle added successfully!');
       }
     } catch (error) {
       console.error('Error saving vehicle:', error);
@@ -66,7 +69,7 @@ const VehicleForm = ({ isEdit }) => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/vehicles"/>
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit Vehicle' : 'Add New Vehicle'}</h2>
       <form onSubmit={handleSubmit} className="bg-white p-4 border border-gray-200">

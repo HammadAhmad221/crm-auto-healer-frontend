@@ -194,10 +194,11 @@ import axios from "axios";
 import HomeButton from "../components/HomeButton";
 import BackButton from "../components/BackButton";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const LoadForm = ({ isEdit }) => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [load, setLoad] = useState({
     vehicleId: "",
     driverId: "",
@@ -272,12 +273,14 @@ const LoadForm = ({ isEdit }) => {
             headers: { Authorization: localStorage.getItem("token") },
           }
         );
-        toast.success("Load updated successfully!");
+        // toast.success("Load updated successfully!");
+        navigate('/loads')
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/loads`, load, {
           headers: { Authorization: localStorage.getItem("token") },
         });
-        toast.success("Load added successfully!");
+        navigate('/loads')
+        // toast.success("Load added successfully!");
       }
       // navigate('/loads');
     } catch (error) {
@@ -289,7 +292,7 @@ const LoadForm = ({ isEdit }) => {
   return (
     <>
       <HomeButton />
-      <BackButton />
+      <BackButton backto="/loads"/>
 
       <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold mb-6">
@@ -332,19 +335,19 @@ const LoadForm = ({ isEdit }) => {
             </label>
             <select
               name="driverId"
-              value={load?.driverId._id}
+              value={load?.driverId?._id}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              required
+              // required
             >
               {/* <option value="">Select a Driver</option> */}
               {isEdit ? (
-                <option value={load.driverId.name}>{load.driverId?.name}</option>
+                <option value={load?.driverId?.name}>{load?.driverId?.name}</option>
               ) : (
                 <option value="">Select a Driver</option>
               )}
               {drivers.map((driver) => (
-                <option key={driver._id} value={driver._id}>
+                <option key={driver?._id} value={driver?._id}>
                   {driver?.name}
                 </option>
               ))}

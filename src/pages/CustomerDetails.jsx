@@ -5,9 +5,11 @@ import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState(null);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const CustomerDetails = () => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto='/customers'/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Customer Details</h2>
@@ -94,7 +96,8 @@ const CustomerDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              toast.success('Customer deleted successfully');
+              navigate('/customers');
+              // toast.success('Customer deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }

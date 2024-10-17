@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
@@ -14,6 +14,7 @@ const UserForm = ({ isEdit }) => {
     role: 'Admin',
   });
   // const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isEdit) {
@@ -47,14 +48,16 @@ const UserForm = ({ isEdit }) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('User updated successfully!');
+        // toast.success('User updated successfully!');
+        navigate('/users')
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/users`, user, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('User added successfully!');
+        // toast.success('User added successfully!');
+        navigate('/users')
       }
     } catch (error) {
       console.error('Error saving user:', error);
@@ -66,7 +69,7 @@ const UserForm = ({ isEdit }) => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/users"/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">{isEdit ? 'Edit User' : 'Add New User'}</h2>

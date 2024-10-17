@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -14,6 +14,7 @@ const InvoiceDetails = () => {
   const [invoice, setInvoice] = useState(null);
   const[vehicle, setVehicle] = useState(null);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -76,8 +77,13 @@ try{
 
   return (
 <>
+{localStorage.getItem("token") &&
+<>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/invoices"/>
+</>
+}
+
 
 <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <div id="invoice-pdf" className="p-8 border border-gray-300">
@@ -110,7 +116,6 @@ try{
           <h3 className="text-lg font-medium text-gray-700">Vehicle Info:</h3>
           <p className="text-sm text-gray-600">Model: {vehicle?.model}</p>
           <p className="text-sm text-gray-600">Make: {vehicle?.make}</p>
-          <p className="text-sm text-gray-600">Vin: {vehicle?.vin}</p>
           <p className="text-sm text-gray-600">Year: {vehicle?.year}</p>
         </div>
       </div>
@@ -178,8 +183,8 @@ try{
                     Authorization: localStorage.getItem('token'),
                   },
                 });
-                // navigate('/invoices');
-              toast.success('Invoice deleted successfully');
+                navigate('/invoices');
+              // toast.success('Invoice deleted successfully');
 
               } catch (error) {
                 console.error('Error deleting invoice:', error);

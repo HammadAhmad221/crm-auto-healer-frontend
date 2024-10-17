@@ -6,10 +6,11 @@ import axios from 'axios';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const InvoiceForm = ({ isEdit }) => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [invoice, setInvoice] = useState({
     customerId: '',
@@ -103,14 +104,16 @@ const truncateText = (text, maxLength) => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('Invoice updated successfully!');
+        // toast.success('Invoice updated successfully!');
+        navigate('/invoices')
       } else {
         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/invoices`, invoice, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        toast.success('Invoice added successfully!');
+        // toast.success('Invoice added successfully!');
+        navigate('/invoices')
       }
     } catch (error) {
       console.error('Error saving invoice:', error);
@@ -121,7 +124,7 @@ const truncateText = (text, maxLength) => {
   return (
     <>
       <HomeButton />
-    <BackButton/>
+    <BackButton backto="/invoices"/>
 
       <div className="max-w-xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold mb-6">

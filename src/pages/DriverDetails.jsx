@@ -11,6 +11,7 @@ const DriverDetails = () => {
   const [driver, setDriver] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDriver = async () => {
@@ -37,7 +38,7 @@ const DriverDetails = () => {
   return (
 <>
 <HomeButton/>
-<BackButton/>
+<BackButton backto="/drivers"/>
 
 <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Driver Details</h2>
@@ -80,7 +81,8 @@ const DriverDetails = () => {
                   'Authorization': localStorage.getItem('token'),
                 },
               });
-              toast.success('Driver deleted successfully');
+              navigate('/drivers')
+              // toast.success('Driver deleted successfully');
             } catch (error) {
               console.error('Error deleting customer:', error);
             }

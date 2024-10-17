@@ -30,7 +30,7 @@ const EmailList = () => {
   return (
    <>
     <HomeButton/>
-    <BackButton/>
+    <BackButton backto='/admin'/>
     <div className="max-w-4xl mx-auto px-4 py-6">
       <h2 className="text-2xl font-bold mb-6">Inbox</h2>
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
