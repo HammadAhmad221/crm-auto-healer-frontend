@@ -184,7 +184,7 @@ const CustomerList = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                      <span className="truncate max-w-xs hover:whitespace-normal hover:bg-gray-100" title={customer.email}>
+                      <span className="max-w-xs hover:whitespace-normal hover:bg-gray-100" title={customer.email}>
                         {customer.email}
                       </span>
                     </td>
