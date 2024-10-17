@@ -75,7 +75,7 @@ const UserList = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                    <span className="truncate max-w-xs" title={user.email}>
+                    <span className="max-w-xs" title={user.email}>
                       {user.email}
                     </span>
                   </td>
