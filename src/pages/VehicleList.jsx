@@ -105,7 +105,7 @@ const VehicleList = () => {
                         e.stopPropagation();
                       handleCustomerClick(vehicle?.customer)
                       }} title={vehicle?.customer?.name}>
-                      {vehicle?.customer?.name}
+                      {vehicle?.customer?.name || "N/A"}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
