@@ -108,8 +108,8 @@ try{
                 <div className="mb-8">
           <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
           <p className="text-sm text-gray-600">Name: {invoice.customerId?.name}</p>
+          <p className="text-sm text-gray-600">Phone: {invoice.customerId?.phone}</p>
           <p className="text-sm text-gray-600">Email: {invoice.customerId?.email}</p>
-          <p className="text-sm text-gray-600">Contact: {invoice.customerId?.phone}</p>
         </div>
         {/* Vehicle */}
         <div className="mb-8">

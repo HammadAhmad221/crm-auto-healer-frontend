@@ -251,7 +251,7 @@ const LoadList = () => {
               <thead>
                 <tr>
                   {['Load Id', 'Vehicle', 'Customer', 'Driver', 'Amount', 'Pickup Location', 'Delivery Location', 'Status', 'Actions'].map(header => (
-                    <th key={header} className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th key={header} className={ `px-6 py-3 border-b border-gray-200 bg-gray-50 ${header=='Actions'? 'text-center' : 'text-left'} text-xs font-medium text-gray-500 uppercase tracking-wider`}>
                       {header}
                     </th>
                   ))}
@@ -270,10 +270,10 @@ const LoadList = () => {
                       <span className="truncate max-w-xs" title={load?.customerId?.name}>{load?.customerId?.name}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                      <span className="truncate max-w-xs" title={load?.driverId?.name}>{load?.driverId?.name}</span>
+                      <span className="truncate max-w-xs" title={load?.driverId?.name}>{load?.driverId?.name || "N/A"}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                      <span className="truncate max-w-xs" title={load?.amount}>{load?.amount}</span>
+                      <span className="truncate max-w-xs" title={load?.amount}>{load?.amount || "N/A"}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                       <span className="truncate max-w-xs" title={load?.pickupLocation}>{load?.pickupLocation}</span>
@@ -288,17 +288,10 @@ const LoadList = () => {
                         options={statusOptions}
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-gray-200 flex gap-1">
-                      {load.hasInvoice ? (
+                    <td className="px-6 py-4 whitespace-nowrap border-gray-200 flex gap-1 justify-end">
+                      {load.invoiceId && (
                         <button 
-                          onClick={() => navigate('/loads/generatedInvoice', { state: { loadId: load._id, customerId: load.customerId._id, amount: load.amount } })} 
-                          className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
-                        >
-                          <FaPrint />
-                        </button>
-                      ) : (
-                        <button 
-                          onClick={() => navigate('/loads/generatedInvoice', { state: { loadId: load._id, customerId: load.customerId._id, amount: load.amount } })} 
+                          onClick={() => navigate('/loads/generatedInvoice', { state: { loadId: load._id, customerId: load.customerId._id, amount: load.amount, invoiceId: load.invoiceId } })} 
                           className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
                         >
                           <FaPrint />

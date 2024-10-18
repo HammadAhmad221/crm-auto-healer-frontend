@@ -9,7 +9,7 @@ import Loading from '../components/Loading';
 
 const GenerateInvoiceFromLoad = () => {
   const location = useLocation();
-  const { loadId, customerId, amount } = location.state || {};
+  const { loadId, customerId, amount, invoiceId } = location.state || {};
   
   const [loadDetails, setLoadDetails] = useState(null);
   // const [customerDetails, setCustomerDetails] = useState(null);
@@ -22,14 +22,14 @@ const GenerateInvoiceFromLoad = () => {
   }
 
   useEffect(() => {
-    const createInvoice = async () =>{
-        try{
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/invoices`,invoiceData);
-        }catch(error){
-            console.error('Error creating Invoice:', error);
-            setError('Failed to Create Invoice');
-        }
-    }
+    // const createInvoice = async () =>{
+    //     try{
+    //         await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/invoices`,invoiceData);
+    //     }catch(error){
+    //         console.error('Error creating Invoice:', error);
+    //         setError('Failed to Create Invoice');
+    //     }
+    // }
     const fetchLoadDetails = async () => {
       try {
         const loadResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/loads/${loadId}`);
@@ -50,7 +50,9 @@ const GenerateInvoiceFromLoad = () => {
     //     setError('Failed to fetch customer details');
     //   }
     // };
-    createInvoice();
+    // if(!invoiceId){
+    // createInvoice();
+    // }
     fetchLoadDetails();
     // fetchCustomerDetails();
   }, [loadId, customerId]);
