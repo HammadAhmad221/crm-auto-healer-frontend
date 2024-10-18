@@ -148,7 +148,7 @@ const DriverList = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
-        setDrivers(response.data);
+        setDrivers(response.data.reverse());
       } catch (error) {
         console.error('Error fetching drivers:', error);
       }finally{

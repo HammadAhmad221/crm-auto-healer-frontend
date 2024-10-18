@@ -199,7 +199,7 @@ const LoadList = () => {
           hasInvoice: invoices.some((invoice) => invoice.loadId === load._id),
         }));
 
-        setLoads(loadsWithInvoices);
+        setLoads(loadsWithInvoices.reverse());
       } catch (error) {
         console.error('Error fetching loads:', error);
       } finally {

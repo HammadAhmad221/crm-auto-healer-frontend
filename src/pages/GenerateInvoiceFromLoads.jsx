@@ -2,24 +2,25 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
 import BackButton from '../components/BackButton';
 import Loading from '../components/Loading';
 
 const GenerateInvoiceFromLoad = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { loadId, customerId, amount, invoiceId } = location.state || {};
   
   const [loadDetails, setLoadDetails] = useState(null);
   // const [customerDetails, setCustomerDetails] = useState(null);
   const [error, setError] = useState('');
-  const invoiceData ={
-    customerId,
-    loadId,
-    amount,
-    status:"Unpaid",
-  }
+  // const invoiceData ={
+  //   customerId,
+  //   loadId,
+  //   amount,
+  //   status:"Unpaid",
+  // }
 
   useEffect(() => {
     // const createInvoice = async () =>{
@@ -86,9 +87,26 @@ const GenerateInvoiceFromLoad = () => {
     return <Loading/>;
   }
 
-  if(!loadDetails?.invoiceId){
-    return <p>No Invoice created for this Load</p>
+  // if(!loadDetails?.invoiceId){
+  //   return <p>No Invoice created for this Load</p>
+  // }
+  if (!loadDetails?.invoiceId) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md text-center">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">No Invoice Available</h2>
+          <p className="text-gray-600 mb-6">It looks like an invoice has not been created for this load yet. Please check back later or contact support for more information.</p>
+          <button 
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+            onClick={() => navigate('/loads')}
+          >
+            Ok
+          </button>
+        </div>
+      </div>
+    );
   }
+  
 
   return (
     <>

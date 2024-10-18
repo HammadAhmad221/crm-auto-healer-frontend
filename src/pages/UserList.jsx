@@ -24,7 +24,7 @@ const UserList = () => {
             },
           }
         );
-        setUsers(response.data);
+        setUsers(response.data.reverse());
       } catch (error) {
         console.error("Error fetching users:", error);
       }finally{

@@ -38,7 +38,7 @@ const VehicleList = () => {
             },
           }
         );
-        setVehicles(response.data);
+        setVehicles(response.data.reverse());
       } catch (error) {
         console.error("Error fetching vehicles:", error);
       }finally{

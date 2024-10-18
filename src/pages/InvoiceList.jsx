@@ -24,7 +24,7 @@ const InvoiceList = () => {
             },
           }
         );
-        setInvoices(response.data);
+        setInvoices(response.data.reverse());
       } catch (error) {
         console.error("Error fetching invoices:", error);
       }finally{
