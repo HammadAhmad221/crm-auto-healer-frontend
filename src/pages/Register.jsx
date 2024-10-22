@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/user/register`, { name, email, password });
-      toast.success('Registration successful!');
-      // if(response){
-      //   localStorage.setItem('User',response.data);
-      // }
-      navigate('/');
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}api/user/register`,
+        { name, email, password }
+      );
+      toast.success("Registration successful!");
+      navigate("/");
     } catch (error) {
-      toast.error(error.response.data || 'Registration failed. Please try again.');
+      toast.error(
+        error.response.data || "Registration failed. Please try again."
+      );
     }
   };
 
@@ -30,7 +32,10 @@ const Register = () => {
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name
             </label>
             <input
@@ -44,7 +49,10 @@ const Register = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -58,7 +66,10 @@ const Register = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -81,7 +92,10 @@ const Register = () => {
           </div>
         </form>
         <div className="text-sm text-center">
-          Already have an account? <a href="/" className="text-indigo-600 hover:underline">Login</a>
+          Already have an account?{" "}
+          <a href="/" className="text-indigo-600 hover:underline">
+            Login
+          </a>
         </div>
       </div>
     </div>
