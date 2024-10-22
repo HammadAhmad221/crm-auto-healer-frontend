@@ -1,10 +1,12 @@
 import ProfileDropdown from "../components/ProfileDropdown";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const AdminDashboard = () => {
   const [counts, setCounts] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -42,16 +44,15 @@ const AdminDashboard = () => {
                 {counts?.customer}
               </h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/customers/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/customers/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
 
           {/* Drivers */}
@@ -63,16 +64,15 @@ const AdminDashboard = () => {
               <h3 className="text-xl mb-2 font-bold text-white">Drivers</h3>
               <h3 className="text-xl font-bold text-white">{counts?.driver}</h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/drivers/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/drivers/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
 
           {/* Users */}
@@ -84,16 +84,15 @@ const AdminDashboard = () => {
               <h3 className="text-xl mb-2 font-bold text-white">Users</h3>
               <h3 className="text-xl font-bold text-white">{counts?.user}</h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/users/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/users/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
 
           {/* Loads */}
@@ -105,16 +104,15 @@ const AdminDashboard = () => {
               <h3 className="text-xl mb-2 font-bold text-white">Loads</h3>
               <h3 className="text-xl font-bold text-white">{counts?.load}</h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/loads/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/loads/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
 
           {/* Invoices */}
@@ -128,16 +126,15 @@ const AdminDashboard = () => {
                 {counts?.invoice}
               </h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/invoices/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/invoices/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
           {/* Statistics */}
           <Link
@@ -158,16 +155,15 @@ const AdminDashboard = () => {
                 {counts?.vehicle}
               </h3>
             </div>
-            <ul>
-              <li>
-                <Link
-                  to="/vehicles/new"
-                  className="text-white font-bold hover:underline"
-                >
-                  Add New
-                </Link>
-              </li>
-            </ul>
+            <div
+              className="text-white font-bold hover:underline w-20"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/vehicles/new");
+              }}
+            >
+              Add New
+            </div>
           </Link>
 
           {/* Communication Logs */}
