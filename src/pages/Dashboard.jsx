@@ -7,7 +7,7 @@ import axios from "axios";
 const AdminDashboard = () => {
   const [counts, setCounts] = useState();
   const [summary, setSummary] = useState();
-  const [totalEmails, setTotalEmails] = useState();
+  // const [totalEmails, setTotalEmails] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,14 +46,15 @@ const AdminDashboard = () => {
     const fetchEmailCount = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}emails/count`);
-        // console.log('Total Emails:', response.data.totalEmails);
-        setTotalEmails(response.data.totalEmails);
+        // setTotalEmails(response.data.totalEmails);
+        localStorage.setItem('logs',response.data.totalEmails);
       } catch (error) {
         console.error('Error fetching email count:', error);
       }
     };
-    
-  fetchEmailCount();
+    if(!localStorage.getItem('logs')){
+      fetchEmailCount();
+    }
   }, [])
   
 
@@ -215,7 +216,7 @@ const AdminDashboard = () => {
                 Communication Logs
               </h3>
               <h3 className="text-xl font-bold text-white">
-                {totalEmails}
+                {localStorage.getItem('logs')}
               </h3>
             </div>
           </Link>
