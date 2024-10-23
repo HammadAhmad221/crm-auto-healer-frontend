@@ -422,7 +422,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="vehicleId"
               value={vehicleOptions.find(
-                (option) => option.value === load.vehicleId
+                (option) => option.value === load.vehicleId._id
               )}
               onChange={handleSelectChange}
               options={vehicleOptions}
@@ -441,7 +441,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="driverId"
               value={driverOptions.find(
-                (option) => option.value === load.driverId
+                (option) => option.value === load.driverId._id
               )}
               onChange={handleSelectChange}
               options={driverOptions}
@@ -459,7 +459,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="customerId"
               value={customerOptions.find(
-                (option) => option.value === load.customerId
+                (option) => option.value === load.customerId._id
               )}
               onChange={handleSelectChange}
               options={customerOptions}
