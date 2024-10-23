@@ -23,6 +23,7 @@ const LoadDetails = () => {
           }
         );
         setLoad(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching load:", error);
         setError("Failed to fetch load details");
@@ -66,6 +67,12 @@ const LoadDetails = () => {
             Delivery Location:
           </h3>
           <p className="detailsTruncate">{load?.deliveryLocation}</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-lg font-medium text-gray-700">
+            Created At:
+          </h3>
+          <p className="detailsTruncate">{new Date(load.date).toLocaleDateString()}</p>
         </div>
         <div className="mb-4">
           <h3 className="text-lg font-medium text-gray-700">Load Details:</h3>

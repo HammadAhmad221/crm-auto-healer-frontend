@@ -79,6 +79,9 @@ const VehicleList = () => {
                     Customer
                   </th>
                   <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Created At
+                  </th>
+                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -114,6 +117,11 @@ const VehicleList = () => {
                         title={vehicle?.customer?.name}
                       >
                         {vehicle?.customer?.name || "N/A"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                      <span className="truncate max-w-xs" title={new Date(vehicle.createdAt).toLocaleDateString()}>
+                        {new Date(vehicle.createdAt).toLocaleDateString()}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">

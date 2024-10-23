@@ -28,6 +28,7 @@ const VehicleDetails = () => {
           }
         );
         setVehicle(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching vehicle:", error);
       }
@@ -75,6 +76,10 @@ const VehicleDetails = () => {
           <div className="mb-6">
             <strong className="block text-lg font-medium">Year:</strong>
             <p className="detailsTruncate">{vehicle.year}</p>
+          </div>
+          <div className="mb-6">
+            <strong className="block text-lg font-medium">Created At:</strong>
+            <p className="detailsTruncate">{new Date(vehicle.createdAt).toLocaleDateString()}</p>
           </div>
           <div className="mb-6">
             <strong className="block text-lg font-medium text-gray-700">

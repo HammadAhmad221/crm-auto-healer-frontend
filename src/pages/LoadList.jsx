@@ -104,6 +104,7 @@ const LoadList = () => {
                     "Pickup Location",
                     "Delivery Location",
                     "Status",
+                    "Creared At",
                     "Actions",
                   ].map((header) => (
                     <th
@@ -181,6 +182,14 @@ const LoadList = () => {
                         }
                         options={statusOptions}
                       />
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                      <span
+                        className="truncate max-w-xs"
+                        title={new Date(load.date).toLocaleDateString()}
+                      >
+                        {new Date(load.date).toLocaleDateString()}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-gray-200 flex gap-1 justify-end">
                       {load.invoiceId && (

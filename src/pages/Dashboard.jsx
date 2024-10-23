@@ -6,6 +6,8 @@ import axios from "axios";
 
 const AdminDashboard = () => {
   const [counts, setCounts] = useState();
+  const [summary, setSummary] = useState();
+  const [totalEmails, setTotalEmails] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +21,41 @@ const AdminDashboard = () => {
           "recordCounts",
           JSON.stringify(response.data.result)
         );
+        try {
+          const invoiceSummary = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}api/invoices/summary`,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
+          );
+          setSummary(invoiceSummary.data);
+          // console.log("invoice data:", invoiceSummary.data);
+        } catch (error) {
+          console.error("Can not get invoices amount:", error);
+        }
       } catch (error) {
         console.error("Failed to fetch record counts");
       }
     };
     fetchCounts();
   }, []);
+  useEffect(() => {
+
+    const fetchEmailCount = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}emails/count`);
+        // console.log('Total Emails:', response.data.totalEmails);
+        setTotalEmails(response.data.totalEmails);
+      } catch (error) {
+        console.error('Error fetching email count:', error);
+      }
+    };
+    
+  fetchEmailCount();
+  }, [])
+  
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 pt-4">
@@ -139,9 +170,17 @@ const AdminDashboard = () => {
           {/* Statistics */}
           <Link
             to="/invoices/stats"
-            className="bg-orange-700 p-4 rounded-lg shadow-md hover:bg-orange-800"
+            className="bg-orange-700 p-4 rounded-lg shadow-md hover:bg-orange-800 flex justify-between"
           >
             <h3 className="text-xl mb-2 font-bold text-white">Stats</h3>
+            <div>
+              <h3 className="text-xl font-bold text-white text-right">
+                P:{summary?.totalPaid}
+              </h3>
+              <h3 className="text-xl font-bold text-white text-right">
+                U:{summary?.totalUnpaid}
+              </h3>
+            </div>
           </Link>
 
           {/* Vehicles */}
@@ -176,7 +215,7 @@ const AdminDashboard = () => {
                 Communication Logs
               </h3>
               <h3 className="text-xl font-bold text-white">
-                {counts?.communicationlog}
+                {totalEmails}
               </h3>
             </div>
           </Link>

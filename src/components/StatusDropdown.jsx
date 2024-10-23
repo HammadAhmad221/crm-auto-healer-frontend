@@ -58,7 +58,9 @@ const StatusDropdown = ({ currentStatus, onChangeStatus, options }) => {
     <div className="relative">
       <div
         className={`cursor-pointer whitespace-nowrap select-none text-center border-b border-gray-200 ${currentStatus === options[0] ? 'text-green-600' : currentStatus === options[1] ? 'text-red-600' : 'text-yellow-600'}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen)}}
       >
         {currentStatus}
         <span className='pl-2'> ▽ </span>
@@ -69,7 +71,11 @@ const StatusDropdown = ({ currentStatus, onChangeStatus, options }) => {
             <li
               key={option}
               className="cursor-pointer py-2 px-3 hover:bg-blue-500 hover:text-white"
-              onClick={() => handleStatusChange(option)}
+              onClick={(e) =>{
+                e.stopPropagation();
+                handleStatusChange(option)}
+              } 
+                
             >
               {option}
             </li>

@@ -26,7 +26,6 @@ const InvoiceDetails = () => {
           }
         );
         setInvoice(response.data);
-        console.log(response.data);
         try {
           const vehicle = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}api/vehicles/${
@@ -39,7 +38,6 @@ const InvoiceDetails = () => {
             }
           );
           setVehicle(vehicle.data);
-          console.log("Vehicle", vehicle.data);
         } catch (error) {
           console.log(error);
         }
@@ -50,29 +48,39 @@ const InvoiceDetails = () => {
     };
     fetchInvoice();
   }, [id]);
-
   const downloadPdf = () => {
     const input = document.getElementById("invoice-pdf");
-
-    html2canvas(input, { scale: 2 }).then((canvas) => {
+    
+    const clone = input.cloneNode(true);
+    
+    clone.style.width = "1025px";
+    clone.style.height = "auto";
+    clone.style.transform = "scale(1)";
+  
+    document.body.appendChild(clone);
+    
+    html2canvas(clone, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-
+  
       const pdf = new jsPDF("p", "mm", "a4");
-
+  
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
-
+  
       const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-
+  
       const x = (pdfWidth - imgWidth * ratio) / 2;
       const y = 10;
-
+  
       pdf.addImage(imgData, "PNG", x, y, imgWidth * ratio, imgHeight * ratio);
       pdf.save(`invoice_${invoice?.invoiceId}.pdf`);
+      
+      document.body.removeChild(clone);
     });
   };
+  
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
@@ -92,7 +100,6 @@ const InvoiceDetails = () => {
 
       <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <div id="invoice-pdf" className="p-8 border border-gray-300">
-          {/* Header Section */}
           <div className="flex justify-between items-center mb-8 flex-wrap">
             <div>
               <h1 className="text-3xl font-bold text-gray-700">INVOICE</h1>
@@ -124,7 +131,6 @@ const InvoiceDetails = () => {
           </div>
 
           <div className="flex items-center justify-between flex-wrap">
-            {/* Bill To Section */}
             <div className="mb-8">
               <h3 className="text-lg font-medium text-gray-700">Bill To:</h3>
               <p className="text-sm text-gray-600">
@@ -137,7 +143,6 @@ const InvoiceDetails = () => {
                 Email: {invoice.customerId?.email}
               </p>
             </div>
-            {/* Vehicle */}
             <div className="mb-8">
               <h3 className="text-lg font-medium text-gray-700">
                 Vehicle Info:
@@ -148,7 +153,6 @@ const InvoiceDetails = () => {
             </div>
           </div>
 
-          {/* Invoice Details */}
           <table className="w-full mb-8 border-collapse">
             <thead>
               <tr>
@@ -165,7 +169,6 @@ const InvoiceDetails = () => {
                 <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">
                   FROM: {invoice.loadId?.pickupLocation}
                 </td>
-                {/* <td className="border-b border-gray-200 py-2 px-4 text-right text-sm text-gray-700">${loadDetails.amount.toFixed(2) || 'N/A'}</td> */}
               </tr>
               <tr>
                 <td className="border-b border-gray-200 py-2 px-4 text-sm text-gray-700 max-w-80 whitespace-normal break-words">
@@ -183,7 +186,6 @@ const InvoiceDetails = () => {
             </tbody>
           </table>
 
-          {/* Payment Status */}
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-700">
               Payment Status:
@@ -201,7 +203,6 @@ const InvoiceDetails = () => {
             </p>
           </div>
 
-          {/* Footer */}
           <div className="text-sm text-gray-500 text-center">
             <p>Thank you for your business!</p>
             <p className="mt-4">
@@ -211,7 +212,6 @@ const InvoiceDetails = () => {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex justify-end mt-8">
           <button
             onClick={downloadPdf}
@@ -244,7 +244,6 @@ const InvoiceDetails = () => {
                         }
                       );
                       navigate("/invoices");
-                      // toast.success('Invoice deleted successfully');
                     } catch (error) {
                       console.error("Error deleting invoice:", error);
                     }

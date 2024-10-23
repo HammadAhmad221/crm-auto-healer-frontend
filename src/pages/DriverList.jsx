@@ -53,7 +53,7 @@ const DriverList = () => {
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
                 <tr>
-                  {["Name", "License Number", "Phone Number", "Actions"].map(
+                  {["Name", "License Number", "Phone Number","Created At" ,"Actions"].map(
                     (header) => (
                       <th
                         key={header}
@@ -93,6 +93,14 @@ const DriverList = () => {
                         title={driver.contactDetails.phoneNumber}
                       >
                         {driver.contactDetails.phoneNumber}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                      <span
+                        className="truncate max-w-xs hover:bg-gray-100"
+                        title={driver.date.split('T')[0]}
+                      >
+                        {new Date(driver.date).toLocaleDateString()}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">

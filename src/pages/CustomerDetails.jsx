@@ -43,15 +43,19 @@ const CustomerDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
             <p className="text-lg font-medium mb-2 detailsTruncate">
-              <strong>Name:</strong> {customer.name}
+              <strong>Name:</strong> {customer?.name}
             </p>
             <br />
             <p className="text-lg font-medium mb-2 detailsTruncate">
-              <strong>Email:</strong> {customer.email}
+              <strong>Email:</strong> {customer?.email}
             </p>
             <br />
             <p className="text-lg font-medium mb-2 detailsTruncate">
-              <strong>Phone:</strong> {customer.phone}
+              <strong>Phone:</strong> {customer?.phone}
+            </p>
+            <br />
+            <p className="text-lg font-medium mb-2 detailsTruncate">
+              <strong>Created At:</strong> {new Date(customer.createdAt).toLocaleDateString()}
             </p>
             <br />
           </div>

@@ -1,9 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; 
 import React, { useEffect, useState } from "react";
 import HomeButton from "../components/HomeButton";
 import BackButton from "../components/BackButton";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Select from "react-select";
 
 const InvoiceForm = ({ isEdit }) => {
   const { id } = useParams();
@@ -18,15 +19,6 @@ const InvoiceForm = ({ isEdit }) => {
 
   const [customers, setCustomers] = useState([]);
   const [loads, setLoads] = useState([]);
-
-  const [customerInput, setCustomerInput] = useState("");
-  const [loadInput, setLoadInput] = useState("");
-
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
-  const [filteredLoads, setFilteredLoads] = useState([]);
-
-  const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
-  const [showLoadDropdown, setShowLoadDropdown] = useState(false);
 
   // Fetch customer data
   useEffect(() => {
@@ -44,7 +36,6 @@ const InvoiceForm = ({ isEdit }) => {
           a.name.localeCompare(b.name)
         );
         setCustomers(sortedCustomers);
-        setFilteredCustomers(sortedCustomers);
       } catch (error) {
         console.error("Error fetching customers:", error);
       }
@@ -65,10 +56,8 @@ const InvoiceForm = ({ isEdit }) => {
             },
           }
         );
-        setLoads(response.data);
         const sortedLoads = response.data.sort((a, b) => b.loadId - a.loadId);
-        setFilteredLoads(sortedLoads);
-        console.log(sortedLoads);
+        setLoads(sortedLoads);
       } catch (error) {
         console.error("Error fetching loads:", error);
       }
@@ -90,17 +79,12 @@ const InvoiceForm = ({ isEdit }) => {
             }
           );
           const fetchedInvoice = response.data;
-          console.log("feched invoice", fetchedInvoice);
-
-          // Update the invoice state directly
           setInvoice({
-            customerId: fetchedInvoice.customerId,
-            loadId: fetchedInvoice.loadId,
+            customerId: fetchedInvoice.customerId._id,
+            loadId: fetchedInvoice.loadId._id,
             amount: fetchedInvoice.amount,
             status: fetchedInvoice.status,
           });
-          setCustomerInput(fetchedInvoice.customerId.name);
-          setLoadInput(fetchedInvoice.loadId.loadId);
         } catch (error) {
           console.error("Error fetching invoice:", error);
         }
@@ -109,39 +93,6 @@ const InvoiceForm = ({ isEdit }) => {
 
     fetchInvoice();
   }, [isEdit, id]);
-
-  // Handle input changes for invoice fields
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInvoice((prevInvoice) => ({
-      ...prevInvoice,
-      [name]: value,
-    }));
-  };
-
-  // Handle customer search input
-  const handleCustomerInput = (e) => {
-    const value = e.target.value;
-    setCustomerInput(value);
-    setFilteredCustomers(
-      customers.filter((customer) =>
-        customer.name.toLowerCase().includes(value.toLowerCase())
-      )
-    );
-    setShowCustomerDropdown(true);
-  };
-
-  // Handle load search input
-  const handleLoadInput = (e) => {
-    const value = e.target.value;
-    setLoadInput(value);
-    setFilteredLoads(
-      loads.filter((load) =>
-        load.loadId.toString().toLowerCase().includes(value.toLowerCase())
-      )
-    );
-    setShowLoadDropdown(true);
-  };
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -176,6 +127,21 @@ const InvoiceForm = ({ isEdit }) => {
     }
   };
 
+  // Handle Select changes for customer and load
+  const handleCustomerChange = (selectedOption) => {
+    setInvoice((prevInvoice) => ({
+      ...prevInvoice,
+      customerId: selectedOption.value,
+    }));
+  };
+
+  const handleLoadChange = (selectedOption) => {
+    setInvoice((prevInvoice) => ({
+      ...prevInvoice,
+      loadId: selectedOption.value,
+    }));
+  };
+
   return (
     <>
       <HomeButton />
@@ -186,85 +152,42 @@ const InvoiceForm = ({ isEdit }) => {
           {isEdit ? "Edit Invoice" : "Add New Invoice"}
         </h2>
         <form onSubmit={handleSubmit}>
-          {/* Customer Search Input */}
-          <div className="mb-4 relative">
+          {/* Customer Select */}
+          <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
               Customer
             </label>
-            <input
-              type="text"
-              name="customerId"
-              value={customerInput}
-              onChange={handleCustomerInput}
-              onFocus={() => setShowCustomerDropdown(true)}
-              onBlur={() => {
-                setTimeout(() => setShowCustomerDropdown(false), 200);
-              }}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search Customer"
+            <Select
+            name="customerId"
+              value={customers.find((customer) => customer._id === invoice.customerId._id)}
+              onChange={handleCustomerChange}
+              options={customers.map((customer) => ({
+                value: customer._id,
+                label: `${customer.name}, ${customer.email}`,
+              }))}
+              className="mt-1 block w-full"
+              placeholder="Select Customer"
               required
             />
-            {showCustomerDropdown && (
-              <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-48 overflow-y-auto">
-                {filteredCustomers.map((customer) => (
-                  <div
-                    key={customer._id}
-                    onClick={() => {
-                      setInvoice((prevInvoice) => ({
-                        ...prevInvoice,
-                        customerId: customer._id,
-                      }));
-                      setCustomerInput(customer.name);
-                      setShowCustomerDropdown(false);
-                    }}
-                    className="cursor-pointer p-2 hover:bg-gray-100"
-                  >
-                    {customer.name}, {customer.email}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
-          {/* Load Search Input */}
-          <div className="mb-4 relative">
+          {/* Load Select */}
+          <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
               Load
             </label>
-            <input
-              type="text"
-              name="loadId"
-              value={loadInput}
-              onChange={handleLoadInput}
-              onFocus={() => setShowLoadDropdown(true)}
-              onBlur={() => {
-                setTimeout(() => setShowLoadDropdown(false), 200);
-              }}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search Load"
+            <Select
+            name="loadId"
+              value={loads.find((load) => load._id === invoice.loadId._id)}
+              onChange={handleLoadChange}
+              options={loads.map((load) => ({
+                value: load._id,
+                label: `${load.loadId} from "${load.pickupLocation}" to "${load.deliveryLocation}"`,
+              }))}
+              className="mt-1 block w-full"
+              placeholder="Select Load"
               required
             />
-            {showLoadDropdown && (
-              <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-48 overflow-y-auto">
-                {filteredLoads.map((load) => (
-                  <div
-                    key={load._id}
-                    onClick={() => {
-                      setInvoice((prevInvoice) => ({
-                        ...prevInvoice,
-                        loadId: load._id,
-                      }));
-                      setLoadInput(load.loadId);
-                      setShowLoadDropdown(false);
-                    }}
-                    className="cursor-pointer p-2 hover:bg-gray-100"
-                  >
-                    {load.loadId} from "{load.pickupLocation}" to "
-                    {load.deliveryLocation}"
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
           <div className="mb-4">
@@ -274,7 +197,12 @@ const InvoiceForm = ({ isEdit }) => {
             <select
               name="status"
               value={invoice.status}
-              onChange={handleChange}
+              onChange={(e) =>
+                setInvoice((prevInvoice) => ({
+                  ...prevInvoice,
+                  status: e.target.value,
+                }))
+              }
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="Unpaid">Unpaid</option>
@@ -294,6 +222,306 @@ const InvoiceForm = ({ isEdit }) => {
 };
 
 export default InvoiceForm;
+
+//code with the custom search working
+// import { useParams, useNavigate } from "react-router-dom";
+// import React, { useEffect, useState } from "react";
+// import HomeButton from "../components/HomeButton";
+// import BackButton from "../components/BackButton";
+// import { toast } from "react-toastify";
+// import axios from "axios";
+
+// const InvoiceForm = ({ isEdit }) => {
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+
+//   const [invoice, setInvoice] = useState({
+//     customerId: "",
+//     loadId: "",
+//     amount: "",
+//     status: "Unpaid",
+//   });
+
+//   const [customers, setCustomers] = useState([]);
+//   const [loads, setLoads] = useState([]);
+
+//   const [customerInput, setCustomerInput] = useState("");
+//   const [loadInput, setLoadInput] = useState("");
+
+//   const [filteredCustomers, setFilteredCustomers] = useState([]);
+//   const [filteredLoads, setFilteredLoads] = useState([]);
+
+//   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
+//   const [showLoadDropdown, setShowLoadDropdown] = useState(false);
+
+//   // Fetch customer data
+//   useEffect(() => {
+//     const fetchCustomers = async () => {
+//       try {
+//         const response = await axios.get(
+//           `${import.meta.env.VITE_BACKEND_URL}api/customers`,
+//           {
+//             headers: {
+//               Authorization: localStorage.getItem("token"),
+//             },
+//           }
+//         );
+//         const sortedCustomers = response.data.sort((a, b) =>
+//           a.name.localeCompare(b.name)
+//         );
+//         setCustomers(sortedCustomers);
+//         setFilteredCustomers(sortedCustomers);
+//       } catch (error) {
+//         console.error("Error fetching customers:", error);
+//       }
+//     };
+
+//     fetchCustomers();
+//   }, []);
+
+//   // Fetch load data
+//   useEffect(() => {
+//     const fetchLoads = async () => {
+//       try {
+//         const response = await axios.get(
+//           `${import.meta.env.VITE_BACKEND_URL}api/loads`,
+//           {
+//             headers: {
+//               Authorization: localStorage.getItem("token"),
+//             },
+//           }
+//         );
+//         setLoads(response.data);
+//         const sortedLoads = response.data.sort((a, b) => b.loadId - a.loadId);
+//         setFilteredLoads(sortedLoads);
+//         console.log(sortedLoads);
+//       } catch (error) {
+//         console.error("Error fetching loads:", error);
+//       }
+//     };
+
+//     fetchLoads();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchInvoice = async () => {
+//       if (isEdit && id) {
+//         try {
+//           const response = await axios.get(
+//             `${import.meta.env.VITE_BACKEND_URL}api/invoices/${id}`,
+//             {
+//               headers: {
+//                 Authorization: localStorage.getItem("token"),
+//               },
+//             }
+//           );
+//           const fetchedInvoice = response.data;
+//           console.log("feched invoice", fetchedInvoice);
+
+//           // Update the invoice state directly
+//           setInvoice({
+//             customerId: fetchedInvoice.customerId,
+//             loadId: fetchedInvoice.loadId,
+//             amount: fetchedInvoice.amount,
+//             status: fetchedInvoice.status,
+//           });
+//           setCustomerInput(fetchedInvoice.customerId.name);
+//           setLoadInput(fetchedInvoice.loadId.loadId);
+//         } catch (error) {
+//           console.error("Error fetching invoice:", error);
+//         }
+//       }
+//     };
+
+//     fetchInvoice();
+//   }, [isEdit, id]);
+
+//   // Handle input changes for invoice fields
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setInvoice((prevInvoice) => ({
+//       ...prevInvoice,
+//       [name]: value,
+//     }));
+//   };
+
+//   // Handle customer search input
+//   const handleCustomerInput = (e) => {
+//     const value = e.target.value;
+//     setCustomerInput(value);
+//     setFilteredCustomers(
+//       customers.filter((customer) =>
+//         customer.name.toLowerCase().includes(value.toLowerCase())
+//       )
+//     );
+//     setShowCustomerDropdown(true);
+//   };
+
+//   // Handle load search input
+//   const handleLoadInput = (e) => {
+//     const value = e.target.value;
+//     setLoadInput(value);
+//     setFilteredLoads(
+//       loads.filter((load) =>
+//         load.loadId.toString().toLowerCase().includes(value.toLowerCase())
+//       )
+//     );
+//     setShowLoadDropdown(true);
+//   };
+
+//   // Handle form submission
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       if (isEdit) {
+//         await axios.put(
+//           `${import.meta.env.VITE_BACKEND_URL}api/invoices/${id}`,
+//           invoice,
+//           {
+//             headers: {
+//               Authorization: localStorage.getItem("token"),
+//             },
+//           }
+//         );
+//         navigate("/invoices");
+//       } else {
+//         await axios.post(
+//           `${import.meta.env.VITE_BACKEND_URL}api/invoices`,
+//           invoice,
+//           {
+//             headers: {
+//               Authorization: localStorage.getItem("token"),
+//             },
+//           }
+//         );
+//         navigate("/invoices");
+//       }
+//     } catch (error) {
+//       console.error("Error saving invoice:", error);
+//       toast.error(error.response.data.message);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <HomeButton />
+//       <BackButton backto="/invoices" />
+
+//       <div className="max-w-xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+//         <h2 className="text-2xl font-semibold mb-6">
+//           {isEdit ? "Edit Invoice" : "Add New Invoice"}
+//         </h2>
+//         <form onSubmit={handleSubmit}>
+//           {/* Customer Search Input */}
+//           <div className="mb-4 relative">
+//             <label className="block text-sm font-medium text-gray-700">
+//               Customer
+//             </label>
+//             <input
+//               type="text"
+//               name="customerId"
+//               value={customerInput}
+//               onChange={handleCustomerInput}
+//               onFocus={() => setShowCustomerDropdown(true)}
+//               onBlur={() => {
+//                 setTimeout(() => setShowCustomerDropdown(false), 200);
+//               }}
+//               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+//               placeholder="Search Customer"
+//               required
+//             />
+//             {showCustomerDropdown && (
+//               <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-48 overflow-y-auto">
+//                 {filteredCustomers.map((customer) => (
+//                   <div
+//                     key={customer._id}
+//                     onClick={() => {
+//                       setInvoice((prevInvoice) => ({
+//                         ...prevInvoice,
+//                         customerId: customer._id,
+//                       }));
+//                       setCustomerInput(customer.name);
+//                       setShowCustomerDropdown(false);
+//                     }}
+//                     className="cursor-pointer p-2 hover:bg-gray-100"
+//                   >
+//                     {customer.name}, {customer.email}
+//                   </div>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Load Search Input */}
+//           <div className="mb-4 relative">
+//             <label className="block text-sm font-medium text-gray-700">
+//               Load
+//             </label>
+//             <input
+//               type="text"
+//               name="loadId"
+//               value={loadInput}
+//               onChange={handleLoadInput}
+//               onFocus={() => setShowLoadDropdown(true)}
+//               onBlur={() => {
+//                 setTimeout(() => setShowLoadDropdown(false), 200);
+//               }}
+//               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+//               placeholder="Search Load"
+//               required
+//             />
+//             {showLoadDropdown && (
+//               <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-48 overflow-y-auto">
+//                 {filteredLoads.map((load) => (
+//                   <div
+//                     key={load._id}
+//                     onClick={() => {
+//                       setInvoice((prevInvoice) => ({
+//                         ...prevInvoice,
+//                         loadId: load._id,
+//                       }));
+//                       setLoadInput(load.loadId);
+//                       setShowLoadDropdown(false);
+//                     }}
+//                     className="cursor-pointer p-2 hover:bg-gray-100"
+//                   >
+//                     {load.loadId} from "{load.pickupLocation}" to "
+//                     {load.deliveryLocation}"
+//                   </div>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+
+//           <div className="mb-4">
+//             <label className="block text-sm font-medium text-gray-700">
+//               Status
+//             </label>
+//             <select
+//               name="status"
+//               value={invoice.status}
+//               onChange={handleChange}
+//               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+//             >
+//               <option value="Unpaid">Unpaid</option>
+//               <option value="Paid">Paid</option>
+//             </select>
+//           </div>
+//           <button
+//             type="submit"
+//             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+//           >
+//             {isEdit ? "Update Invoice" : "Create Invoice"}
+//           </button>
+//         </form>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default InvoiceForm;
+//custom search working code end here
+
 
 // with both dropdowns working code
 

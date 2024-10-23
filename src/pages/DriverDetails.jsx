@@ -23,6 +23,7 @@ const DriverDetails = () => {
           }
         );
         setDriver(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching driver details:", error);
       } finally {
@@ -50,6 +51,10 @@ const DriverDetails = () => {
         <div className="mb-6">
           <strong className="block text-lg font-medium">License Number:</strong>
           <p className="detailsTruncate">{driver.licenseNumber}</p>
+        </div>
+        <div className="mb-6">
+          <strong className="block text-lg font-medium">Created At:</strong>
+          <p className="detailsTruncate">{new Date(driver.date).toLocaleDateString()}</p>
         </div>
         <div className="mb-6">
           <strong className="block text-lg font-medium">Certifications:</strong>

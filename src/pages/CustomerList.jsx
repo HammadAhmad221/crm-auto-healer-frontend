@@ -23,6 +23,7 @@ const CustomerList = () => {
           }
         );
         setCustomers(response.data.reverse());
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching customers:", error);
       } finally {
@@ -55,7 +56,7 @@ const CustomerList = () => {
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
                 <tr>
-                  {["Name", "Email", "Phone Number", "Actions"].map(
+                  {["Name", "Email", "Phone Number","Created At", "Actions"].map(
                     (header) => (
                       <th
                         key={header}
@@ -95,6 +96,14 @@ const CustomerList = () => {
                         title={customer.phone}
                       >
                         {customer.phone}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                      <span
+                        className="truncate max-w-xs hover:whitespace-normal hover:bg-gray-100"
+                        title={customer.createdAt}
+                      >
+                        {new Date(customer.createdAt).toLocaleDateString()}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 flex gap-1">
