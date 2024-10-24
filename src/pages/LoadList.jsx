@@ -51,7 +51,7 @@ const LoadList = () => {
     fetchLoadsAndInvoices();
   }, []);
 
-  const statusOptions = ["Delivered", "In Transit", "In Progress"];
+  const statusOptions = ['Assigned', 'In Progress', 'Delivered', 'Pending'];
 
   const handleUpdateStatus = async (loadId, newStatus) => {
     try {
