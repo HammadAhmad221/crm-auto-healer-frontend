@@ -387,18 +387,18 @@ const LoadForm = ({ isEdit }) => {
   };
 
   const vehicleOptions = vehicles.map((vehicle) => ({
-    value: vehicle._id,
+    value: vehicle?._id,
     label: vehicle.make,
   }));
 
   const driverOptions = drivers.map((driver) => ({
-    value: driver._id,
+    value: driver?._id,
     label: driver.name,
   }));
 
   const customerOptions = customers.map((customer) => ({
-    value: customer._id,
-    label: customer.name,
+    value: customer?._id,
+    label: customer?.name,
   }));
 
   return (
@@ -422,7 +422,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="vehicleId"
               value={vehicleOptions.find(
-                (option) => option.value === load.vehicleId._id
+                (option) => option.value === load.vehicleId?._id
               )}
               onChange={handleSelectChange}
               options={vehicleOptions}
@@ -441,7 +441,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="driverId"
               value={driverOptions.find(
-                (option) => option.value === load.driverId._id
+                (option) => option.value === load.driverId?._id
               )}
               onChange={handleSelectChange}
               options={driverOptions}
@@ -459,7 +459,7 @@ const LoadForm = ({ isEdit }) => {
             <Select
               name="customerId"
               value={customerOptions.find(
-                (option) => option.value === load.customerId._id
+                (option) => option.value === load.customerId?._id
               )}
               onChange={handleSelectChange}
               options={customerOptions}
@@ -542,6 +542,7 @@ const LoadForm = ({ isEdit }) => {
               <option value="Assigned">Assigned</option>
               <option value="In Progress">In Progress</option>
               <option value="Delivered">Delivered</option>
+              <option value="Pending">Pending</option>
             </select>
           </div>
 

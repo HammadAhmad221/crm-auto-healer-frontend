@@ -109,7 +109,7 @@ const LoadList = () => {
                   ].map((header) => (
                     <th
                       key={header}
-                      className={`px-6 py-3 border-b border-gray-200 bg-gray-50 ${
+                      className={`px-2 py-2 border-b border-gray-200 bg-gray-50 ${
                         header == "Actions" ? "text-center" : "text-left"
                       } text-xs font-medium text-gray-500 uppercase tracking-wider`}
                     >
@@ -124,12 +124,12 @@ const LoadList = () => {
                     key={load._id}
                     onClick={() => navigate(`/loads/${load._id}`)}
                   >
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span className="truncate max-w-xs" title={load?.loadId}>
                         {load?.loadId}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={load?.vehicleId?.make}
@@ -137,7 +137,7 @@ const LoadList = () => {
                         {load?.vehicleId?.make}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={load?.customerId?.name}
@@ -145,7 +145,7 @@ const LoadList = () => {
                         {load?.customerId?.name}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={load?.driverId?.name}
@@ -153,12 +153,12 @@ const LoadList = () => {
                         {load?.driverId?.name || "N/A"}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span className="truncate max-w-xs" title={load?.amount}>
                         {load?.amount || "N/A"}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={load?.pickupLocation}
@@ -166,7 +166,7 @@ const LoadList = () => {
                         {load?.pickupLocation}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={load?.deliveryLocation}
@@ -174,7 +174,7 @@ const LoadList = () => {
                         {load?.deliveryLocation}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <StatusDropdown
                         currentStatus={load.status}
                         onChangeStatus={(newStatus) =>
@@ -183,7 +183,7 @@ const LoadList = () => {
                         options={statusOptions}
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+                    <td className="px-2 py-2 whitespace-nowrap border-b border-gray-200">
                       <span
                         className="truncate max-w-xs"
                         title={new Date(load.date).toLocaleDateString()}
@@ -191,7 +191,7 @@ const LoadList = () => {
                         {new Date(load.date).toLocaleDateString()}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap border-gray-200 flex gap-1 justify-end">
+                    <td className="px-2 py-2 whitespace-nowrap border-gray-200 flex gap-1 justify-end">
                       {load.invoiceId && (
                         <button
                           onClick={(e) => {
