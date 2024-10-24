@@ -44,6 +44,8 @@ const DriverDetails = () => {
 
       <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Driver Details</h2>
+        <div className="bg-white p-4 border border-gray-200">
+
         <div className="mb-6">
           <strong className="block text-lg font-medium">Name:</strong>
           <p className="detailsTruncate">{driver.name}</p>
@@ -108,6 +110,7 @@ const DriverDetails = () => {
           >
             Delete
           </button>
+        </div>
         </div>
       </div>
     </>

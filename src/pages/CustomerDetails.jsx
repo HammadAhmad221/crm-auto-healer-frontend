@@ -40,7 +40,8 @@ const CustomerDetails = () => {
 
       <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Customer Details</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-white p-4 border border-gray-200">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
             <p className="text-lg font-medium mb-2 detailsTruncate">
               <strong>Name:</strong> {customer?.name}
@@ -59,7 +60,25 @@ const CustomerDetails = () => {
             </p>
             <br />
           </div>
-        </div>
+        </div> */}
+          <div className="mb-6">
+            <strong className="block text-lg font-medium">Name:</strong>
+            <p className="detailsTruncate">{customer.name}</p>
+          </div>
+          <div className="mb-6">
+            <strong className="block text-lg font-medium">Email:</strong>
+            <p className="detailsTruncate">{customer.email}</p>
+          </div>
+          <div className="mb-6">
+            <strong className="block text-lg font-medium">Phone:</strong>
+            <p className="detailsTruncate">{customer.phone}</p>
+          </div>
+          <div className="mb-6">
+            <strong className="block text-lg font-medium">Created At:</strong>
+            <p className="detailsTruncate">
+              {new Date(customer.createdAt).toLocaleDateString()}
+            </p>
+          </div>
         <div className="flex justify-end gap-4 mt-8">
           <Link
             to={`/customers/${id}/edit`}
@@ -91,6 +110,7 @@ const CustomerDetails = () => {
           >
             Delete
           </button>
+        </div>
         </div>
       </div>
     </>

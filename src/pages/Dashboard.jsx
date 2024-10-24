@@ -57,7 +57,6 @@ const AdminDashboard = () => {
     }
   }, [])
   
-
   return (
     <div className="min-h-screen bg-gray-100 px-4 pt-4">
       <h1 className="pl-4 text-3xl font-bold mb-6">Admin Dashboard</h1>

@@ -107,7 +107,6 @@ const VehicleDetails = () => {
               </div>
             )}
           </div>
-        </div>
         <div className="flex justify-end mt-6">
           <Link
             to={`/vehicles/${vehicle._id}/edit`}
@@ -122,6 +121,8 @@ const VehicleDetails = () => {
             Delete
           </button>
         </div>
+        </div>
+        
       </div>
     </>
   );
