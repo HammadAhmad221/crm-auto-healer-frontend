@@ -9,47 +9,88 @@ import axios from "axios";
 
 const LoadList = () => {
   const [loads, setLoads] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
 
+  const fetchLoadsAndInvoices = async (page) => {
+    setLoading(true);
+    try {
+      // Fetch loads with pagination
+      const loadsResponse = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}api/loads`,
+        {
+          params: { page, limit: 20 },
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      // Fetch invoices
+      const invoicesResponse = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}api/invoices`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      const invoices = invoicesResponse.data;
+      const { data: loadsData, totalPages } = loadsResponse.data;
+
+      // Map loads with invoices
+      const loadsWithInvoices = loadsData.map((load) => ({
+        ...load,
+        hasInvoice: invoices.some((invoice) => invoice.loadId === load._id),
+      }));
+
+      // Append new loads to the existing ones
+      // setLoads((prevLoads) => [...prevLoads, ...loadsWithInvoices]);
+      setLoads((prev) => {
+        const newLoads = loadsWithInvoices.filter(
+          (newLoad) => !prev.some((existingLoad) => existingLoad._id === newLoad._id)
+        );
+        return [...prev, ...newLoads];
+      });
+
+      // Check if there are more pages to load
+      setHasMore(page < totalPages);
+    } catch (error) {
+      console.error("Error fetching loads:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchLoadsAndInvoices = async () => {
-      try {
-        const loadsResponse = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}api/loads`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        );
+    // Fetch initial data
+    fetchLoadsAndInvoices(currentPage);
+  }, []);
 
-        const invoicesResponse = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}api/invoices`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        );
-
-        const invoices = invoicesResponse.data;
-
-        const loadsWithInvoices = loadsResponse.data.map((load) => ({
-          ...load,
-          hasInvoice: invoices.some((invoice) => invoice.loadId === load._id),
-        }));
-
-        setLoads(loadsWithInvoices.reverse());
-      } catch (error) {
-        console.error("Error fetching loads:", error);
-      } finally {
-        setLoading(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 50 &&
+        hasMore &&
+        !loading
+      ) {
+        setCurrentPage((prev) => prev + 1);
       }
     };
 
-    fetchLoadsAndInvoices();
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasMore, loading]);
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      fetchLoadsAndInvoices(currentPage);
+    }
+  }, [currentPage]);
 
   const statusOptions = ['Assigned', 'In Progress', 'Delivered', 'Pending'];
 
@@ -88,9 +129,6 @@ const LoadList = () => {
         >
           Add New Load
         </Link>
-        {loading ? (
-          <Loading />
-        ) : (
           <div className="scrollbar-custom overflow-x-auto">
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
@@ -266,8 +304,8 @@ const LoadList = () => {
                 ))}
               </tbody>
             </table>
+            {loading && <Loading/>}
           </div>
-        )}
       </div>
     </>
   );

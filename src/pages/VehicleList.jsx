@@ -10,7 +10,9 @@ import axios from "axios";
 
 const VehicleList = () => {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Set to false to control loading state
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const [hasMore, setHasMore] = useState(true); // Control if there are more vehicles to load
   const navigate = useNavigate();
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,27 +27,65 @@ const VehicleList = () => {
     setSelectedCustomer(null);
   };
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}api/vehicles`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
+  const fetchVehicles = async (page) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}api/vehicles`,
+        {
+          params: { page, limit: 20 }, // Send page and limit for pagination
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      const { data, totalPages } = response.data;
+
+      // Append the new vehicles to the existing ones
+      // setVehicles((prevVehicles) => [...prevVehicles, ...data]);
+      setVehicles((prev) => {
+        const newVehicles = data.filter(
+          (newVehicle) => !prev.some((existingVehicle) => existingVehicle._id === newVehicle._id)
         );
-        setVehicles(response.data.reverse());
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      } finally {
-        setLoading(false);
+        return [...prev, ...newVehicles];
+      });
+
+      // Check if there are more pages to fetch
+      setHasMore(page < totalPages);
+    } catch (error) {
+      console.error("Error fetching vehicles:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch initial vehicles
+    fetchVehicles(currentPage);
+  }, []); // Load the first page of vehicles on component mount
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 50 &&
+        hasMore &&
+        !loading
+      ) {
+        setCurrentPage((prevPage) => prevPage + 1); // Load the next page
       }
     };
 
-    fetchVehicles();
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasMore, loading]);
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      fetchVehicles(currentPage); // Fetch next page of vehicles
+    }
+  }, [currentPage]);
 
   return (
     <>
@@ -59,9 +99,6 @@ const VehicleList = () => {
         >
           Add New Vehicle
         </Link>
-        {loading ? (
-          <Loading />
-        ) : (
           <div className="scrollbar-custom overflow-x-auto">
             <table className="min-w-full bg-white border border-gray-200">
               <thead>
@@ -182,8 +219,8 @@ const VehicleList = () => {
                 ))}
               </tbody>
             </table>
+            {loading && <Loading/>}
           </div>
-        )}
       </div>
       <CustomerDetailsModal
         isOpen={isModalOpen}
