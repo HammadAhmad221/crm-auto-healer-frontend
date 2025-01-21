@@ -266,7 +266,7 @@ const InvoiceForm = ({ isEdit }) => {
             },
           }
         );
-        const sortedCustomers = response.data.sort((a, b) =>
+        const sortedCustomers = response.data.data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
         setCustomers(sortedCustomers);
@@ -291,7 +291,7 @@ const InvoiceForm = ({ isEdit }) => {
             },
           }
         );
-        setLoads(response.data);
+        setLoads(response.data.data);
         const sortedLoads = response.data.sort((a, b) => b.loadId - a.loadId);
         setFilteredLoads(sortedLoads);
         console.log(sortedLoads);
